@@ -51,7 +51,7 @@ const UserProfile = () => {
                     borderRadius: 3,
                 }}>
 
-                <Typography variant="h6" sx={{ mb: 1 }}>
+                <Typography variant="h6" sx={{ mb: 1, color: '#B0B0B0' }}>
                     Settings
                 </Typography>
 
@@ -67,7 +67,7 @@ const UserProfile = () => {
                     <MenuItem
                         onClick={() => handleMenuClick('profile')}
                         sx={{
-                            backgroundColor: selectedMenu === 'profile' && '#000',
+                            backgroundColor: selectedMenu === 'profile' ? '#000' : 'transparent',
                             color: selectedMenu === 'profile' ? '#fff' : 'black',
                             borderRadius: 1,
                         }}
@@ -152,6 +152,7 @@ const UserProfile = () => {
                                     <Button
                                         variant="outlined"
                                         sx={{
+                                            textTransform: 'none', 
                                             borderColor: '#4F4F4F',
                                             color: '#4F4F4F',
                                             width: '150px',
@@ -215,6 +216,7 @@ const UserProfile = () => {
                                 <Button
                                     variant="contained"
                                     sx={{
+                                        textTransform: 'none',
                                         ml: 4,
                                         color: '#FFFFF',
                                         width: '150px',
@@ -306,6 +308,7 @@ const UserProfile = () => {
                                     <Button
                                         variant="outlined"
                                         sx={{
+                                            textTransform: 'none',
                                             border: 'none',
                                             backgroundColor: '#E7E7E7',
                                             color: '#000',
@@ -321,6 +324,7 @@ const UserProfile = () => {
                                     <Button
                                         variant="contained"
                                         sx={{
+                                            textTransform: 'none',
                                             color: '#FFFFFF',
                                             width: '146px',
                                             padding: '7px',

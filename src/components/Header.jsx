@@ -104,10 +104,21 @@ const Header = () => {
                             textDecoration: 'none',
                             flexGrow: 1,
                         }}>
-                        NEXPOST
+                        <Link to={'/'} style={{
+                            textDecoration: 'none',
+                            color: '#000',
+                            fontSize: '28px',
+                            fontWeight: 500,
+                            '&:hover': {
+                                color: '#007BFF',
+                                textDecoration: 'underline',
+                            },
+                        }}>
+                            NEXPOST
+                        </Link>
                     </Typography>
 
-                    <Box sx={{justifyContent:'flex-start'}}>
+                    <Box sx={{ justifyContent: 'flex-start' }}>
                         <Stack direction="row" spacing={1}>
                             <Chip
                                 label="Free"
@@ -290,6 +301,7 @@ const Header = () => {
                                         }}>
                                         <Button
                                             sx={{
+                                                textTransform: 'none',
                                                 fontSize: '15px',
                                                 height: '45px',
                                                 width: '100%',
