@@ -19,6 +19,7 @@ import RocketOutlinedIcon from '@mui/icons-material/RocketOutlined';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { Link } from 'react-router-dom';
 
 const settings = ['Profile', 'Account', 'Logout'];
 
@@ -57,9 +58,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Header = () => {
     const [activeTab, setActiveTab] = useState('monthly');
     const [openCard, setOpenCard] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
 
     //Profile Menu Open
-    const [anchorEl, setAnchorEl] = useState(null);
     const handleOpenMenu = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -174,7 +175,7 @@ const Header = () => {
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center',
-                                    height: '64px'
+                                    // height: '64px'
                                 }}>
                                 <div className="custom-tab-container">
                                     <ul className="nav nav-tabs" role="tablist">
@@ -215,7 +216,6 @@ const Header = () => {
                                                 aria-controls="profile"
                                                 aria-selected={activeTab === 'annually'}>
                                                 Annually
-                                                {/* {activeTab === 'annually' && ( */}
                                                 <Chip
                                                     label="Save 20%"
                                                     variant="filled"
@@ -225,7 +225,6 @@ const Header = () => {
                                                         padding: '2px 8px',
                                                         height: 'auto',
                                                     }} />
-                                                {/* )} */}
                                             </a>
                                         </li>
                                     </ul>
@@ -324,13 +323,13 @@ const Header = () => {
                         <NotificationsIcon />
                     </IconButton>
 
-                    <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', p: 1 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                         <IconButton onClick={handleOpenMenu} sx={{ p: 0 }}>
                             <Avatar alt="NEXPOST" src="/static/images/avatar/1.jpg" />
                         </IconButton>
 
                         <Menu
-                            sx={{ mt: 2 }}
+                            sx={{ mt: 1 }}
                             anchorEl={anchorEl}
                             open={Boolean(anchorEl)}
                             onClose={handleCloseMenu}
@@ -344,15 +343,19 @@ const Header = () => {
                             }}
                         >
                             <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                                <Avatar alt="Jhon Snow" src="/static/images/avatar/1.jpg" sx={{ width: 56, height: 56, mr: 2 }} />
-                                <Box>
-                                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
-                                        Jhon Snow
-                                    </Typography>
-                                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                                        jhonsnow@email.com
-                                    </Typography>
-                                </Box>
+                                <Link to="/UserProfile" style={{ textDecoration: 'none', width: '100%', color: '#454545' }}>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                                        <Avatar alt="Jhon Snow" src="/static/images/avatar/1.jpg" sx={{ width: 56, height: 56, mr: 2 }} />
+                                        <Box>
+                                            <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+                                                Jhon Snow
+                                            </Typography>
+                                            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                                                jhonsnow@email.com
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                </Link>
                             </Box>
 
                             <Divider

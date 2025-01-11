@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Box, Container } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const MyCard = () => {
     return (
@@ -9,23 +10,26 @@ const MyCard = () => {
             </Typography>
 
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '12px', borderRadius: '16px' }} elevation={0}>
-                <Card sx={{ maxWidth: 270, minWidth: 250, maxHeight: 250 }} elevation={0}>
-                    <CardContent>
-                        <Card sx={{ maxWidth: 260, maxHeight: 200 }}>
-                            <CardMedia
-                                sx={{ height: 120, background: '#E7E7E7' }}
-                                image="/static/images/cards/contemplative-reptile.jpg"
-                                title="lizard-thumbnail"
-                            />
-                        </Card>
-                        <Typography gutterBottom component="div" sx={{ marginTop: 2 }}>
-                            LinkedIn Post Generator
-                        </Typography>
-                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                            Post your insights on LinkedIn with awesome content!
-                        </Typography>
-                    </CardContent>
-                </Card>
+
+                <Link to="/LinkdinPost" style={{ textDecoration: 'none' }}>
+                    <Card sx={{ maxWidth: 270, minWidth: 250, maxHeight: 250 }} elevation={0}>
+                        <CardContent>
+                            <Card sx={{ maxWidth: 260, maxHeight: 200 }} elevation={0}>
+                                <CardMedia
+                                    sx={{ height: 120, background: '#E7E7E7' }}
+                                    image="/static/images/cards/contemplative-reptile.jpg"
+                                    title="lizard-thumbnail"
+                                />
+                            </Card>
+                            <Typography gutterBottom component="div" sx={{ marginTop: 2 }}>
+                                LinkedIn Carousal Generator
+                            </Typography>
+                            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                                Create a fun carousel with some cool and unique content!
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Link>
 
                 <Card sx={{ maxWidth: 270, minWidth: 250, maxHeight: 250 }} elevation={0}>
                     <CardContent>
