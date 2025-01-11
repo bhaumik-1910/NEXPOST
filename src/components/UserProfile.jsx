@@ -18,10 +18,10 @@ const theme = createTheme({
 });
 
 const data = [
-    { date: 'Jan 28, 2025', status: 'Up coming', amount: '$2.99', statusColor: 'warning' },
-    { date: 'Dec 28, 2024', status: 'Paid', amount: '$2.99', statusColor: 'success' },
-    { date: 'Nov 22, 2024', status: 'Delay', amount: '$2.99', statusColor: 'error' },
-    { date: 'Oct 28, 2024', status: 'Paid', amount: '$2.99', statusColor: 'success' },
+    { date: 'Jan 28, 2025', status: 'Up coming', amount: '$ 2.99', statusColor: 'warning' },
+    { date: 'Dec 28, 2024', status: 'Paid', amount: '$ 2.99', statusColor: 'success' },
+    { date: 'Nov 22, 2024', status: 'Delay', amount: '$ 2.99', statusColor: 'error' },
+    { date: 'Oct 28, 2024', status: 'Paid', amount: '$ 2.99', statusColor: 'success' },
 ];
 
 const UserProfile = () => {
@@ -408,6 +408,7 @@ const UserProfile = () => {
                                                             <TableCell sx={{ padding: '16px' }}>{row.date}</TableCell>
                                                             <TableCell sx={{ padding: '16px' }}>
                                                                 <Chip
+                                                                    sx={{ backgroundColor: '#FFF7DC', border: 'none' }}
                                                                     label={row.status}
                                                                     color={row.statusColor}
                                                                     variant="outlined"

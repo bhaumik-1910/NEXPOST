@@ -107,27 +107,29 @@ const Header = () => {
                         NEXPOST
                     </Typography>
 
-                    <Stack direction="row" spacing={1}>
-                        <Chip
-                            label="Free"
-                            variant="outlined"
-                            sx={{
-                                padding: '4px 12px',
-                                fontSize: '0.9rem',
-                                borderColor: '#D1D1D1',
-                            }}
-                        />
-                        <Chip
-                            label="Pro"
-                            variant="outlined"
-                            sx={{
-                                bgcolor: '#FFEAD6',
-                                color: '#FF7C00',
-                                padding: '4px 12px',
-                                fontSize: '0.9rem',
-                            }}
-                            onClick={handleOpen} />
-                    </Stack>
+                    <Box sx={{justifyContent:'flex-start'}}>
+                        <Stack direction="row" spacing={1}>
+                            <Chip
+                                label="Free"
+                                variant="outlined"
+                                sx={{
+                                    padding: '4px 12px',
+                                    fontSize: '0.9rem',
+                                    borderColor: '#D1D1D1',
+                                }}
+                            />
+                            <Chip
+                                label="Pro"
+                                variant="outlined"
+                                sx={{
+                                    bgcolor: '#FFEAD6',
+                                    color: '#FF7C00',
+                                    padding: '4px 12px',
+                                    fontSize: '0.9rem',
+                                }}
+                                onClick={handleOpen} />
+                        </Stack>
+                    </Box>
 
                     <Modal Modal
                         open={openCard}
