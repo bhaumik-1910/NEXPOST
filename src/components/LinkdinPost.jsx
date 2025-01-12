@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import Header from './Header'
 import { Box, Typography, Divider, List, ListItem, Slider, ListItemIcon, ListItemText, IconButton, Drawer, } from '@mui/material';
-import { ThemeProvider, createTheme, CssBaseline, Container } from '@mui/material';
+import { ThemeProvider, createTheme, CssBaseline, Switch } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Button, TextField, Avatar, FormControl, FormLabel, } from '@mui/material';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ReceiptLongOutlinedIcon from '@mui/icons-material/ReceiptLongOutlined';
-import RocketOutlinedIcon from '@mui/icons-material/RocketOutlined';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const theme = createTheme({
     palette: {
@@ -54,6 +55,52 @@ const LinkdinPost = () => {
     const handleMenuClick = (menu) => {
         setSelectedMenu(menu);
         setIsDrawerOpen(false);
+    };
+
+    const [isContentVisible, setIsContentVisible] = useState(false);
+
+    const handleToggle = () => {
+        setIsContentVisible((prev) => !prev);
+    };
+
+    const [contentVisible, setContentVisible] = useState(false);
+
+    const handleToggleContent = () => {
+        setContentVisible((prev) => !prev);
+    };
+
+    const [isSwitchOn, setIsSwitchOn] = useState(false);
+
+    const handleSwitchChange = (event) => {
+        setIsSwitchOn(event.target.checked);
+    };
+
+    const [imagePreview, setImagePreview] = useState('');
+    const [error, setError] = useState('');
+
+    const handleFileUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const validTypes = ['image/png', 'image/jpeg', 'image/gif'];
+            if (!validTypes.includes(file.type)) {
+                setError('Only PNG, JPG, and GIF files are allowed.');
+                setImagePreview('');
+                return;
+            }
+
+            if (file.size > 10 * 1024 * 1024) {
+                setError('File size exceeds the 10 MB limit.');
+                setImagePreview('');
+                return;
+            }
+
+            setError('');
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setImagePreview(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     return (
@@ -287,10 +334,10 @@ const LinkdinPost = () => {
                         </MenuItem>
 
                         <MenuItem
-                            onClick={() => handleMenuClick('billing')}
+                            onClick={() => handleMenuClick('LinkedInBioMaker')}
                             sx={{
-                                backgroundColor: selectedMenu === 'billing' ? '#000' : 'transparent',
-                                color: selectedMenu === 'billing' ? '#fff' : 'inherit',
+                                backgroundColor: selectedMenu === 'LinkedInBioMaker' ? '#000' : 'transparent',
+                                color: selectedMenu === 'LinkedInBioMaker' ? '#fff' : 'inherit',
                                 borderRadius: 1,
                                 gap: 1
                             }}
@@ -518,7 +565,7 @@ const LinkdinPost = () => {
                                 position: 'absolute',
                                 left: '60.3%',
                                 transform: 'translateX(-50%)',
-                                bottom: '74.2%',
+                                bottom: '73.1%',
                                 width: '90%',
                                 maxWidth: '1050px',
                                 height: 'auto',
@@ -606,7 +653,7 @@ const LinkdinPost = () => {
 
                         <Box sx={{
                             position: 'absolute',
-                            top: '11.2rem',
+                            top: '11.7rem',
                             // marginLeft:'305px',
                             marginLeft: '24.5rem',
                             height: 'auto',
@@ -1021,7 +1068,7 @@ const LinkdinPost = () => {
 
                         <Box sx={{
                             position: 'absolute',
-                            top: '11.2rem',
+                            top: '11.7rem',
                             left: '55.6rem',
                             height: '935px',
                             width: '551px',
@@ -1060,7 +1107,7 @@ const LinkdinPost = () => {
                                 position: 'absolute',
                                 left: '60.3%',
                                 transform: 'translateX(-50%)',
-                                bottom: '74.2%',
+                                bottom: '73.1%',
                                 width: '90%',
                                 maxWidth: '1050px',
                                 height: 'auto',
@@ -1132,10 +1179,10 @@ const LinkdinPost = () => {
 
                         <Box sx={{
                             position: 'absolute',
-                            top: '11.2rem',
+                            top: '11.7rem',
                             // marginLeft:'305px',
                             marginLeft: '24.5rem',
-                            height: 'auto',
+                            height: '935px',
                             width: '495px',
                             display: 'flex',
                             flexDirection: 'column',
@@ -1212,39 +1259,1118 @@ const LinkdinPost = () => {
                                 }}
                             />
 
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 2,
-                                    mt: 2,
-                                }}>
+                            <FormControl fullWidth sx={{ marginTop: 2, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '25px', color: '#454545', marginTop: '1px', width: 800 }}>Setting</FormLabel>
+                            </FormControl>
 
-                                <Avatar
-                                    alt="Profile Picture"
-                                    src="/path/to/profile.jpg"
+                            <Box sx={{ padding: 2 }}>
+                                <Box
                                     sx={{
-                                        ml: 4,
-                                        width: 80,
-                                        height: 80,
+                                        margin: '20px auto',
+                                        width: '100%',
+                                        maxWidth: '500px',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: 2,
+                                    }}
+                                >
+                                    <Button
+                                        variant="outlined"
+                                        onClick={handleToggle}
+                                        sx={{
+                                            width: 'fit-content',
+                                            // alignSelf: 'center',
+                                            position: 'relative',
+                                            marginLeft: '400px',
+                                            bottom: '75px',
+                                            bgcolor: '#FFF',
+                                            border: 'none',
+                                            '&:hover': { bgcolor: '#F6F6F6' },
+                                        }}
+                                    >
+                                        {isContentVisible ? (
+                                            <KeyboardArrowUpIcon sx={{ color: '#000' }} />
+                                        ) : (
+                                            <KeyboardArrowDownIcon sx={{ color: '#000' }} />
+                                        )}
+                                    </Button>
+
+                                    {isContentVisible && (
+                                        <>
+                                            <FormControl fullWidth sx={{ position: 'relative', bottom: 80, ml: 2 }}>
+                                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', marginTop: '1px' }}>Profile Headshot</FormLabel>
+                                                <Switch
+                                                    checked={isSwitchOn}
+                                                    onChange={handleSwitchChange}
+                                                    inputProps={{ 'aria-label': 'controlled' }}
+                                                    sx={{
+                                                        position: 'relative',
+                                                        marginLeft: '375px',
+                                                        bottom: '22px',
+                                                        width: '45px',
+                                                        height: '23px',
+                                                        padding: 0,
+                                                        '& .MuiSwitch-switchBase': {
+                                                            padding: 1,
+                                                            transform: 'translateX(0px)',
+                                                            '&.Mui-checked': {
+                                                                transform: 'translateX(20px)',
+                                                                color: '#fff',
+                                                                '& + .MuiSwitch-track': {
+                                                                    backgroundColor: '#000',
+                                                                    opacity: 1,
+                                                                },
+                                                            },
+                                                        },
+                                                        '& .MuiSwitch-thumb': {
+                                                            position: 'relative',
+                                                            bottom: '0.3rem',
+                                                            right: 3,
+                                                            width: 17,
+                                                            height: 17,
+                                                            boxShadow: '0 0 2px rgba(0, 0, 0, 0.5)',
+                                                        },
+                                                        '& .MuiSwitch-track': {
+                                                            borderRadius: 14,
+                                                            backgroundColor: '#d1d1d1',
+                                                            opacity: 1,
+                                                            transition: 'background-color 0.3s',
+                                                        },
+                                                    }}
+                                                />
+                                            </FormControl>
+
+                                            <Box
+                                                sx={{
+                                                    position: 'relative',
+                                                    bottom: '115px',
+                                                    display: 'flex',
+                                                    flexDirection: 'row',
+                                                    // padding: 2,
+                                                    left: 12,
+                                                    backgroundColor: '#F9F9F9',
+                                                    borderRadius: 1,
+                                                    bgcolor: '#FFF',
+                                                    alignItems: 'center',
+                                                    gap: 2,
+                                                    // mt: 2,
+                                                }}
+                                            >
+                                                <Avatar
+                                                    alt="Profile Picture"
+                                                    src="/path/to/profile.jpg"
+                                                    sx={{ width: 80, height: 80, marginTop: 2 }} />
+                                                <Button
+                                                    variant="outlined"
+                                                    sx={{
+                                                        textTransform: 'none',
+                                                        borderColor: '#4F4F4F',
+                                                        color: '#4F4F4F',
+                                                        width: '100px',
+                                                        borderRadius: '10px',
+                                                        mt: 2,
+                                                        height: '35px',
+                                                    }}
+                                                >
+                                                    Upload
+                                                </Button>
+                                            </Box>
+                                        </>
+                                    )}
+                                </Box>
+
+                            </Box>
+
+                            <FormControl fullWidth sx={{ position: 'relative', bottom: 110, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', marginTop: '1px' }}>Name </FormLabel>
+                                <Switch
+                                    checked={isSwitchOn}
+                                    onChange={handleSwitchChange}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                    sx={{
+                                        position: 'relative',
+                                        marginLeft: '375px',
+                                        bottom: '22px',
+                                        width: '45px',
+                                        height: '23px',
+                                        padding: 0,
+                                        '& .MuiSwitch-switchBase': {
+                                            padding: 1,
+                                            transform: 'translateX(0px)',
+                                            '&.Mui-checked': {
+                                                transform: 'translateX(20px)',
+                                                color: '#fff',
+                                                '& + .MuiSwitch-track': {
+                                                    backgroundColor: '#000',
+                                                    opacity: 1,
+                                                },
+                                            },
+                                        },
+                                        '& .MuiSwitch-thumb': {
+                                            position: 'relative',
+                                            bottom: '0.3rem',
+                                            right: 3,
+                                            width: 17,
+                                            height: 17,
+                                            boxShadow: '0 0 2px rgba(0, 0, 0, 0.5)',
+                                        },
+                                        '& .MuiSwitch-track': {
+                                            borderRadius: 14,
+                                            backgroundColor: '#d1d1d1',
+                                            opacity: 1,
+                                            transition: 'background-color 0.3s',
+                                        },
                                     }}
                                 />
 
-                                <Button
+                                <TextField
+                                    bgcolor='#D1D1D1'
+                                    size="small"
                                     variant="outlined"
+                                    placeholder="Your Name"
                                     sx={{
-                                        textTransform: 'none',
-                                        borderColor: '#4F4F4F',
-                                        color: '#4F4F4F',
-                                        width: '100px',
-                                        padding: '7px',
-                                        borderRadius: '10px',
-                                        marginTop: 0,
+                                        position: 'relative',
+                                        bottom: '18px',
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                    }} />
+
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ position: 'relative', bottom: 100, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', marginTop: '1px' }}>LinkedIn Handle</FormLabel>
+                                <Switch
+                                    checked={isSwitchOn}
+                                    onChange={handleSwitchChange}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                    sx={{
+                                        position: 'relative',
+                                        marginLeft: '375px',
+                                        bottom: '22px',
+                                        width: '45px',
+                                        height: '23px',
+                                        padding: 0,
+                                        '& .MuiSwitch-switchBase': {
+                                            padding: 1,
+                                            transform: 'translateX(0px)',
+                                            '&.Mui-checked': {
+                                                transform: 'translateX(20px)',
+                                                color: '#fff',
+                                                '& + .MuiSwitch-track': {
+                                                    backgroundColor: '#000',
+                                                    opacity: 1,
+                                                },
+                                            },
+                                        },
+                                        '& .MuiSwitch-thumb': {
+                                            position: 'relative',
+                                            bottom: '0.3rem',
+                                            right: 3,
+                                            width: 17,
+                                            height: 17,
+                                            boxShadow: '0 0 2px rgba(0, 0, 0, 0.5)',
+                                        },
+                                        '& .MuiSwitch-track': {
+                                            borderRadius: 14,
+                                            backgroundColor: '#d1d1d1',
+                                            opacity: 1,
+                                            transition: 'background-color 0.3s',
+                                        },
+                                    }}
+                                />
+
+                                <TextField
+                                    bgcolor='#D1D1D1'
+                                    size="small"
+                                    variant="outlined"
+                                    placeholder="your_linkedin_handle"
+                                    sx={{
+                                        position: 'relative',
+                                        bottom: '18px',
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                    }} />
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ position: 'relative', bottom: 100, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', marginTop: '1px' }}>Remove Watermark</FormLabel>
+                                <Switch
+                                    checked={isSwitchOn}
+                                    onChange={handleSwitchChange}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                    sx={{
+                                        position: 'relative',
+                                        marginLeft: '375px',
+                                        bottom: '22px',
+                                        width: '45px',
+                                        height: '23px',
+                                        padding: 0,
+                                        '& .MuiSwitch-switchBase': {
+                                            padding: 1,
+                                            transform: 'translateX(0px)',
+                                            '&.Mui-checked': {
+                                                transform: 'translateX(20px)',
+                                                color: '#fff',
+                                                '& + .MuiSwitch-track': {
+                                                    backgroundColor: '#000',
+                                                    opacity: 1,
+                                                },
+                                            },
+                                        },
+                                        '& .MuiSwitch-thumb': {
+                                            position: 'relative',
+                                            bottom: '0.3rem',
+                                            right: 3,
+                                            width: 17,
+                                            height: 17,
+                                            boxShadow: '0 0 2px rgba(0, 0, 0, 0.5)',
+                                        },
+                                        '& .MuiSwitch-track': {
+                                            borderRadius: 14,
+                                            backgroundColor: '#d1d1d1',
+                                            opacity: 1,
+                                            transition: 'background-color 0.3s',
+                                        },
+                                    }}
+                                />
+                            </FormControl>
+
+                            <Divider
+                                sx={{
+                                    position: "relative",
+                                    bottom: 100,
+                                    borderColor: '#E7E7E7',
+                                    border: '1px solid',
+                                    borderStyle: 'solid',
+                                }}
+                            />
+
+                            <FormControl fullWidth sx={{ position: 'relative', bottom: 100, marginTop: 2, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '25px', color: '#D1D1D1', marginTop: '1px', width: 800 }}>Content</FormLabel>
+                            </FormControl>
+                            <Box sx={{ padding: 2 }}>
+                                <Box
+                                    sx={{
+                                        margin: '20px auto',
+                                        width: '100%',
+                                        maxWidth: '500px',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: 2,
                                     }}
                                 >
-                                    Upload 
+                                    <Button
+                                        variant="outlined"
+                                        onClick={handleToggleContent}
+                                        sx={{
+                                            width: 'fit-content',
+                                            position: 'relative',
+                                            marginLeft: '400px',
+                                            bottom: 180,
+                                            bgcolor: '#FFF',
+                                            border: 'none',
+                                            '&:hover': { bgcolor: '#F6F6F6' },
+                                        }}
+                                    >
+                                        {contentVisible ? (
+                                            <KeyboardArrowUpIcon sx={{ color: '#000' }} />
+                                        ) : (
+                                            <KeyboardArrowDownIcon sx={{ color: '#000' }} />
+                                        )}
+                                    </Button>
+
+                                    {contentVisible && (
+                                        <>
+                                            <FormControl fullWidth sx={{ position: 'relative', bottom: 170, ml: 2 }}>
+                                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', marginTop: '1px' }}>Title</FormLabel>
+                                                <Switch
+                                                    checked={isSwitchOn}
+                                                    onChange={handleSwitchChange}
+                                                    inputProps={{ 'aria-label': 'controlled' }}
+                                                    sx={{
+                                                        position: 'relative',
+                                                        marginLeft: '375px',
+                                                        bottom: '22px',
+                                                        width: '45px',
+                                                        height: '23px',
+                                                        padding: 0,
+                                                        '& .MuiSwitch-switchBase': {
+                                                            padding: 1,
+                                                            transform: 'translateX(0px)',
+                                                            '&.Mui-checked': {
+                                                                transform: 'translateX(20px)',
+                                                                color: '#fff',
+                                                                '& + .MuiSwitch-track': {
+                                                                    backgroundColor: '#000',
+                                                                    opacity: 1,
+                                                                },
+                                                            },
+                                                        },
+                                                        '& .MuiSwitch-thumb': {
+                                                            position: 'relative',
+                                                            bottom: '0.3rem',
+                                                            right: 3,
+                                                            width: 17,
+                                                            height: 17,
+                                                            boxShadow: '0 0 2px rgba(0, 0, 0, 0.5)',
+                                                        },
+                                                        '& .MuiSwitch-track': {
+                                                            borderRadius: 14,
+                                                            backgroundColor: '#d1d1d1',
+                                                            opacity: 1,
+                                                            transition: 'background-color 0.3s',
+                                                        },
+                                                    }}
+                                                />
+                                                <TextField
+                                                    bgcolor='#D1D1D1'
+                                                    size="small"
+                                                    variant="outlined"
+                                                    placeholder="Ex. Future of AI"
+                                                    sx={{
+                                                        position: 'relative',
+                                                        bottom: '18px',
+                                                        borderRadius: '8px',
+                                                        padding: '4px 0px',
+                                                        width: '430px',
+                                                        '& .MuiInputBase-root': {
+                                                            backgroundColor: '#F6F6F6',
+                                                            color: '#6D6D6D'
+                                                        },
+                                                    }} />
+                                            </FormControl>
+
+                                            <FormControl fullWidth sx={{ position: 'relative', bottom: 170, ml: 2 }}>
+                                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', marginTop: '1px' }}>Subtitle</FormLabel>
+                                                <Switch
+                                                    checked={isSwitchOn}
+                                                    onChange={handleSwitchChange}
+                                                    inputProps={{ 'aria-label': 'controlled' }}
+                                                    sx={{
+                                                        position: 'relative',
+                                                        marginLeft: '375px',
+                                                        bottom: '22px',
+                                                        width: '45px',
+                                                        height: '23px',
+                                                        padding: 0,
+                                                        '& .MuiSwitch-switchBase': {
+                                                            padding: 1,
+                                                            transform: 'translateX(0px)',
+                                                            '&.Mui-checked': {
+                                                                transform: 'translateX(20px)',
+                                                                color: '#fff',
+                                                                '& + .MuiSwitch-track': {
+                                                                    backgroundColor: '#000',
+                                                                    opacity: 1,
+                                                                },
+                                                            },
+                                                        },
+                                                        '& .MuiSwitch-thumb': {
+                                                            position: 'relative',
+                                                            bottom: '0.3rem',
+                                                            right: 3,
+                                                            width: 17,
+                                                            height: 17,
+                                                            boxShadow: '0 0 2px rgba(0, 0, 0, 0.5)',
+                                                        },
+                                                        '& .MuiSwitch-track': {
+                                                            borderRadius: 14,
+                                                            backgroundColor: '#d1d1d1',
+                                                            opacity: 1,
+                                                            transition: 'background-color 0.3s',
+                                                        },
+                                                    }}
+                                                />
+                                                <TextField
+                                                    bgcolor='#D1D1D1'
+                                                    size="small"
+                                                    variant="outlined"
+                                                    placeholder="Your name"
+                                                    sx={{
+                                                        position: 'relative',
+                                                        bottom: '18px',
+                                                        borderRadius: '8px',
+                                                        padding: '4px 0px',
+                                                        width: '430px',
+                                                        '& .MuiInputBase-root': {
+                                                            backgroundColor: '#F6F6F6',
+                                                            color: '#6D6D6D'
+                                                        },
+                                                    }} />
+                                            </FormControl>
+                                        </>
+                                    )}
+                                </Box>
+                            </Box>
+                        </Box>
+
+                        <Box sx={{
+                            position: 'absolute',
+                            top: '11.7rem',
+                            left: '55.6rem',
+                            height: '935px',
+                            width: '551px',
+                            // display: 'flex',
+                            // flexDirection: 'column',
+                            backgroundColor: '#FFFFFF',
+                            borderBottomRightRadius: '10px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                        }}>
+
+                            <Box sx={{ textAlign: 'center', marginTop: '420px' }}>
+                                <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.66663 7H9.33329C10.622 7 11.6666 8.04467 11.6666 9.33333V46.6667C11.6666 47.9553 10.622 49 9.33329 49H4.66663" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M51.3334 7H46.6667C45.378 7 44.3334 8.04467 44.3334 9.33333V46.6667C44.3334 47.9553 45.378 49 46.6667 49H51.3334" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M37.3333 9.33333C37.3333 8.04467 36.2886 7 35 7H21C19.7113 7 18.6666 8.04467 18.6666 9.33333V46.6667C18.6666 47.9553 19.7113 49 21 49H35C36.2886 49 37.3333 47.9553 37.3333 46.6667V9.33333Z" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                                <Typography variant="subtitle2" color='#454545'>
+                                    Filling the form and hit Generate.
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </>
+                )}
+            </Box>
+
+            <Box sx={{ marginBottom: '550px' }}>
+                {selectedMenu === 'LinkedInBioMaker' && (
+                    <>
+
+                        <Box
+                            sx={{
+                                borderTopLeftRadius: '10px',
+                                borderTopRightRadius: '10px',
+                                padding: '12px 20px',
+                                borderBottom: '2px solid #ddd',
+                                bgcolor: '#FFFFFF',
+                                position: 'absolute',
+                                left: '60.3%',
+                                transform: 'translateX(-50%)',
+                                bottom: '73.1%',
+                                width: '90%',
+                                maxWidth: '1050px',
+                                height: 'auto',
+                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+
+                                [theme.breakpoints.down('md')]: {
+                                    width: '95%',
+                                    padding: '12px 15px',
+                                    bottom: '74.2%',
+                                },
+                            }}
+                        >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.00005 43.6349C9.2052 44 10.833 44 13.6 44H34.4C37.167 44 38.7948 44 40 43.6349M8.00005 43.6349C7.74164 43.5566 7.50267 43.4615 7.27606 43.346C6.14708 42.7708 5.2292 41.8529 4.65396 40.7239C4 39.4405 4 37.7603 4 34.4V13.6C4 10.2397 4 8.55953 4.65396 7.27606C5.2292 6.14708 6.14708 5.2292 7.27606 4.65396C8.55953 4 10.2397 4 13.6 4H34.4C37.7603 4 39.4405 4 40.7239 4.65396C41.8529 5.2292 42.7708 6.14708 43.346 7.27606C44 8.55953 44 10.2397 44 13.6V34.4C44 37.7603 44 39.4405 43.346 40.7239C42.7708 41.8529 41.8529 42.7708 40.7239 43.346C40.4973 43.4615 40.2584 43.5566 40 43.6349M8.00005 43.6349C8.00071 42.0162 8.01041 41.1597 8.15372 40.4393C8.78497 37.2658 11.2658 34.785 14.4393 34.1537C15.2121 34 16.1414 34 18 34H30C31.8586 34 32.7879 34 33.5607 34.1537C36.7342 34.785 39.215 37.2658 39.8463 40.4393C39.9896 41.1597 39.9993 42.0162 40 43.6349M32 19C32 23.4183 28.4183 27 24 27C19.5817 27 16 23.4183 16 19C16 14.5817 19.5817 11 24 11C28.4183 11 32 14.5817 32 19Z" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                                <div>
+                                    <Typography variant="body1" sx={{ mb: 0, color: '#454545', fontWeight: 700, fontSize: '20px' }}>
+                                        LinkedIn Bio Maker
+                                    </Typography>
+                                    <Typography style={{ width: '490px', fontSize: '14px', color: '#888888', fontFamily: 'Satoshi Variable', fontWeight: 500 }}>
+                                        Share your knowledge with our AI! It clears creative blocks and suggests topics that highlight your expertise.
+                                    </Typography>
+                                </div>
+
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: 10,
+                                        position: 'absolute',
+                                        right: '20px',
+                                    }}
+                                >
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M2 16C2 14.0307 2.09467 12.1733 2.21867 10.616C2.40533 8.264 4.26933 6.456 6.62267 6.292C8.884 6.13333 11.9733 6 16 6C20.0267 6 23.116 6.13333 25.3773 6.292C27.7307 6.456 29.5947 8.26533 29.7813 10.616C29.9053 12.1747 30 14.0293 30 16C30 18.04 29.8987 19.9587 29.768 21.5507C29.6881 22.6381 29.2161 23.6594 28.4396 24.4249C27.6631 25.1903 26.6351 25.6477 25.5467 25.712C23.2627 25.868 20.0667 26 16 26C11.9333 26 8.73733 25.868 6.45333 25.712C5.36491 25.6477 4.33687 25.1903 3.56039 24.4249C2.78392 23.6594 2.31186 22.6381 2.232 21.5507C2.08003 19.7043 2.00263 17.8526 2 16Z"
+                                            stroke="#1E1E1E"
+                                            strokeWidth="2.08717"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                        <path
+                                            d="M13.3334 20V12L20.6667 16L13.3334 20Z"
+                                            stroke="#1E1E1E"
+                                            strokeWidth="2.08717"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+
+                                    <Typography
+                                        style={{
+                                            width: '100px',
+                                            fontSize: '15px',
+                                            color: '#2E2E2E',
+                                            borderBottom: '1px solid #2E2E2E',
+                                        }}
+                                    >
+                                        How it works?
+                                    </Typography>
+                                </div>
+                            </div>
+                        </Box>
+
+                        <Box sx={{
+                            position: 'absolute',
+                            top: '11.7rem',
+                            // marginLeft:'305px',
+                            marginLeft: '24.5rem',
+                            height: 'auto',
+                            width: '495px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 1,
+                            backgroundColor: '#FFFFFF',
+                            borderBottomLeftRadius: '10px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                        }}>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, marginTop: 2, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>What do you do?</FormLabel>
+                                <TextField
+                                    bgcolor='#D1D1D1'
+                                    size="small"
+                                    placeholder="Ex: co-founder of Nexpost, a tool that helps you grow on LinkedIn"
+                                    variant="outlined"
+                                    height="80px"
+                                    sx={{
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            height: '80px',
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                        '& .MuiOutlinedInput-input': {
+                                            padding: '8px 14px 50px',
+                                        },
+                                    }} />
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ marginBottom: 3, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Who do you target?</FormLabel>
+                                <TextField
+                                    bgcolor='#D1D1D1'
+                                    size="small"
+                                    placeholder="Ex: founders, solopreneurs, freelancers, agencies"
+                                    variant="outlined"
+                                    height="80px"
+                                    sx={{
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            height: '80px',
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                        '& .MuiOutlinedInput-input': {
+                                            padding: '8px 14px 50px',
+                                        },
+                                    }} />
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '15px', color: '#4F4F4F', bottom: '18px', }}>What do you want people to do after reading your summary?</FormLabel>
+                                <TextField
+                                    bgcolor='#D1D1D1'
+                                    size="small"
+                                    placeholder="Ex: follow, visit website, schedule a call"
+                                    variant="outlined"
+                                    height="80px"
+                                    sx={{
+                                        position: 'relative',
+                                        bottom: '18px',
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            height: '80px',
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                        '& .MuiOutlinedInput-input': {
+                                            padding: '8px 14px 50px',
+                                        },
+                                    }} />
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', bottom: '18px', }}>Your Writing sample</FormLabel>
+                                <TextField
+                                    bgcolor='#D1D1D1'
+                                    size="small"
+                                    placeholder="paste your writing sample for the bio maker"
+                                    variant="outlined"
+                                    height="80px"
+                                    sx={{
+                                        position: 'relative',
+                                        bottom: '18px',
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            height: '80px',
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                        '& .MuiOutlinedInput-input': {
+                                            padding: '8px 14px 50px',
+                                        },
+                                    }} />
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, ml: 4, bottom: '18px', }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Writing tone</FormLabel>
+                                <div style={{ display: 'flex', gap: '5px', width: '440px', flexWrap: 'wrap' }}>
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '110px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Professional
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Helpful
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Persuasive
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Friendly
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Humorous
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Inspiring
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Formal
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Academic
+                                    </Button>
+
+                                    <div>
+                                        <Button
+                                            variant="outlined"
+                                            // onClick={handleButtonClick}
+                                            sx={{
+                                                fontSize: "14px",
+                                                textTransform: "none",
+                                                borderRadius: "50px",
+                                                color: "#B0B0B0",
+                                                height: "35px",
+                                                width: "100px",
+                                                backgroundColor: "#FFFFFF",
+                                                border: "1px solid #D1D1D1",
+                                                marginTop: 1,
+                                                gap: 1,
+                                            }}
+                                        >
+                                            <svg width="70" height="70" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.00078 2.66719V13.3328" stroke="#B0B0B0" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+                                                <path d="M2.66797 8H13.3336" stroke="#B0B0B0" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                            Custom
+                                        </Button>
+                                        {isBoxOpen && (
+                                            <Box
+                                                sx={{
+                                                    marginTop: 2,
+                                                    padding: 2,
+                                                    border: "1px solid #D1D1D1",
+                                                    borderRadius: "8px",
+                                                    backgroundColor: "#F9F9F9",
+                                                    width: "300px",
+                                                }}
+                                            >
+                                                <Typography variant="h6" sx={{ marginBottom: 2 }}>
+                                                    List of Items
+                                                </Typography>
+                                                <List>
+                                                    {items.map((item, index) => (
+                                                        <ListItem key={index}>{item}</ListItem>
+                                                    ))}
+                                                </List>
+                                            </Box>
+                                        )}
+                                    </div>
+                                </div>
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ position: 'relative', bottom: 10, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', marginTop: '1px' }}>Toggle to include emojis in your summary</FormLabel>
+                                <Switch
+                                    checked={isSwitchOn}
+                                    onChange={handleSwitchChange}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                    sx={{
+                                        position: 'relative',
+                                        marginLeft: '375px',
+                                        bottom: '22px',
+                                        width: '45px',
+                                        height: '23px',
+                                        padding: 0,
+                                        '& .MuiSwitch-switchBase': {
+                                            padding: 1,
+                                            transform: 'translateX(0px)',
+                                            '&.Mui-checked': {
+                                                transform: 'translateX(20px)',
+                                                color: '#fff',
+                                                '& + .MuiSwitch-track': {
+                                                    backgroundColor: '#000',
+                                                    opacity: 1,
+                                                },
+                                            },
+                                        },
+                                        '& .MuiSwitch-thumb': {
+                                            position: 'relative',
+                                            bottom: '0.3rem',
+                                            right: 3,
+                                            width: 17,
+                                            height: 17,
+                                            boxShadow: '0 0 2px rgba(0, 0, 0, 0.5)',
+                                        },
+                                        '& .MuiSwitch-track': {
+                                            borderRadius: 14,
+                                            backgroundColor: '#d1d1d1',
+                                            opacity: 1,
+                                            transition: 'background-color 0.3s',
+                                        },
+                                    }}
+                                />
+                            </FormControl>
+
+                            <Box
+                                sx={{
+                                    // display: 'flex',
+                                    // justifyContent: 'center', 
+                                    marginLeft: '120px'
+                                }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        textTransform: 'none',
+                                        borderRadius: '50px',
+                                        ml: 4,
+                                        color: '#FFFFF',
+                                        width: '180px',
+                                        padding: '7px',
+                                        backgroundColor: '#000',
+                                        marginTop: 3,
+                                        bottom: '25px',
+                                        gap: 1
+                                    }}
+                                >
+                                    <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.18396 6.70986C3.30388 6.38578 3.76226 6.38578 3.88218 6.70986L4.07691 7.2361C4.11461 7.33799 4.19495 7.41833 4.29684 7.45603L4.82308 7.65076C5.14716 7.77068 5.14716 8.22906 4.82308 8.34898L4.29684 8.54371C4.19495 8.58141 4.11461 8.66174 4.07691 8.76363L3.88218 9.28988C3.76226 9.61396 3.30388 9.61396 3.18396 9.28988L2.98923 8.76363C2.95153 8.66174 2.8712 8.58141 2.76931 8.54371L2.24306 8.34898C1.91898 8.22906 1.91898 7.77068 2.24306 7.65076L2.76931 7.45603C2.8712 7.41833 2.95153 7.33799 2.98923 7.2361L3.18396 6.70986Z" fill="white" />
+                                        <path d="M6.90629 2.24306C7.02622 1.91898 7.48459 1.91898 7.60451 2.24306L8.00032 3.31272C8.03802 3.41461 8.11836 3.49494 8.22025 3.53264L9.2899 3.92845C9.61399 4.04837 9.61398 4.50675 9.2899 4.62667L8.22025 5.02248C8.11836 5.06018 8.03802 5.14051 8.00032 5.2424L7.60451 6.31206C7.48459 6.63614 7.02622 6.63614 6.90629 6.31206L6.51049 5.2424C6.47278 5.14051 6.39245 5.06018 6.29056 5.02248L5.22091 4.62667C4.89682 4.50675 4.89682 4.04837 5.22091 3.92845L6.29056 3.53264C6.39245 3.49494 6.47278 3.41461 6.51049 3.31272L6.90629 2.24306Z" fill="white" />
+                                        <path d="M9.88422 6.70986C10.0041 6.38578 10.4625 6.38578 10.5824 6.70986L11.3804 8.86633C11.4181 8.96822 11.4984 9.04855 11.6003 9.08626L13.7568 9.88422C14.0809 10.0041 14.0809 10.4625 13.7568 10.5824L11.6003 11.3804C11.4984 11.4181 11.4181 11.4984 11.3804 11.6003L10.5824 13.7568C10.4625 14.0809 10.0041 14.0809 9.88422 13.7568L9.08626 11.6003C9.04855 11.4984 8.96822 11.4181 8.86633 11.3804L6.70986 10.5824C6.38578 10.4625 6.38578 10.0041 6.70986 9.88422L8.86633 9.08626C8.96822 9.04855 9.04855 8.96822 9.08626 8.86633L9.88422 6.70986Z" fill="white" />
+                                    </svg>
+                                    Generate Bio
                                 </Button>
                             </Box>
+                        </Box>
+
+                        <Box sx={{
+                            position: 'absolute',
+                            top: '11.7rem',
+                            left: '55.6rem',
+                            height: '835px',
+                            width: '551px',
+                            // display: 'flex',
+                            // flexDirection: 'column',
+                            backgroundColor: '#FFFFFF',
+                            borderBottomRightRadius: '10px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                        }}>
+
+                            <Box sx={{ textAlign: 'center', marginTop: '380px' }}>
+                                <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.33335 50.9077C10.7394 51.3337 12.6384 51.3337 15.8666 51.3337H40.1333C43.3615 51.3337 45.2606 51.3337 46.6666 50.9077M9.33335 50.9077C9.03188 50.8163 8.75307 50.7054 8.48869 50.5707C7.17156 49.8996 6.10069 48.8287 5.42958 47.5116C4.66663 46.0142 4.66663 44.054 4.66663 40.1337V15.867C4.66663 11.9466 4.66663 9.98644 5.42958 8.48906C6.10069 7.17192 7.17156 6.10106 8.48869 5.42995C9.98608 4.66699 11.9463 4.66699 15.8666 4.66699H40.1333C44.0537 4.66699 46.0138 4.66699 47.5112 5.42995C48.8284 6.10106 49.8992 7.17192 50.5703 8.48906C51.3333 9.98644 51.3333 11.9466 51.3333 15.867V40.1337C51.3333 44.054 51.3333 46.0142 50.5703 47.5116C49.8992 48.8287 48.8284 49.8996 47.5112 50.5707C47.2469 50.7054 46.968 50.8163 46.6666 50.9077M9.33335 50.9077C9.33412 49.0192 9.34544 48.02 9.51263 47.1795C10.2491 43.477 13.1433 40.5828 16.8458 39.8463C17.7474 39.667 18.8316 39.667 21 39.667H35C37.1684 39.667 38.2525 39.667 39.1541 39.8463C42.8566 40.5828 45.7508 43.477 46.4873 47.1795C46.6545 48.02 46.6658 49.0192 46.6666 50.9077M37.3333 22.167C37.3333 27.3217 33.1546 31.5003 28 31.5003C22.8453 31.5003 18.6666 27.3217 18.6666 22.167C18.6666 17.0123 22.8453 12.8337 28 12.8337C33.1546 12.8337 37.3333 17.0123 37.3333 22.167Z" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <Typography variant="subtitle2" color='#454545'>
+                                    Filling the form and hit Generate.
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </>
+                )}
+            </Box>
+
+            <Box sx={{ marginBottom: '550px' }}>
+                {selectedMenu === 'FacebookPostGenerator' && (
+                    <>
+                        <Box
+                            sx={{
+                                borderTopLeftRadius: '10px',
+                                borderTopRightRadius: '10px',
+                                padding: '12px 20px',
+                                borderBottom: '2px solid #ddd',
+                                bgcolor: '#FFFFFF',
+                                position: 'absolute',
+                                left: '60.3%',
+                                transform: 'translateX(-50%)',
+                                bottom: '73.1%',
+                                width: '90%',
+                                maxWidth: '1050px',
+                                height: 'auto',
+                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+
+                                [theme.breakpoints.down('md')]: {
+                                    width: '95%',
+                                    padding: '12px 15px',
+                                    bottom: '74.2%',
+                                },
+                            }}
+                        >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.30273 41.5142V6.48702C3.30273 5.64248 3.63822 4.83256 4.23539 4.23539C4.83256 3.63822 5.64248 3.30273 6.48702 3.30273H41.5142C42.3586 3.30273 43.1687 3.63822 43.7658 4.23539C44.3628 4.83256 44.6984 5.64248 44.6984 6.48702V41.5142C44.6984 42.3586 44.3628 43.1687 43.7658 43.7658C43.1687 44.3628 42.3586 44.6984 41.5142 44.6984H31.9613V29.6049H34.2222C34.7374 29.6049 35.2312 29.4003 35.5955 29.036C35.9598 28.6717 36.1646 28.1777 36.1646 27.6625V25.2106C36.1646 24.9555 36.1143 24.703 36.0168 24.4673C35.9191 24.2316 35.7761 24.0175 35.5955 23.8371C35.4153 23.6568 35.201 23.5137 34.9654 23.4161C34.7297 23.3185 34.4772 23.2682 34.2222 23.2682H32.0887V20.275C32.0887 17.6002 33.2987 17.6002 34.5087 17.6002H36.069C36.3254 17.6107 36.5807 17.5649 36.8173 17.4658C37.0539 17.3668 37.266 17.217 37.4383 17.027C37.6233 16.8509 37.7698 16.6382 37.8685 16.4025C37.9672 16.1668 38.0159 15.9132 38.0114 15.6578V13.3014C38.02 13.0421 37.9774 12.7837 37.8857 12.5409C37.7943 12.2981 37.6561 12.0757 37.4784 11.8864C37.301 11.6972 37.088 11.5447 36.8517 11.4378C36.6155 11.3309 36.3601 11.2717 36.1009 11.2634H32.4389C31.3705 11.2233 30.306 11.4155 29.319 11.8269C28.3321 12.2383 27.4462 12.8591 26.7226 13.6462C25.999 14.4335 25.4549 15.3683 25.1279 16.3864C24.8008 17.4044 24.6987 18.4812 24.8285 19.5426V23.2682H22.7906C22.5328 23.264 22.2768 23.3111 22.0374 23.4068C21.7981 23.5025 21.5802 23.6449 21.3965 23.8257C21.2127 24.0065 21.0668 24.2221 20.9671 24.4599C20.8675 24.6976 20.8163 24.9529 20.8163 25.2106V27.6625C20.8163 27.9203 20.8675 28.1755 20.9671 28.4133C21.0668 28.6511 21.2127 28.8666 21.3965 29.0474C21.5802 29.2282 21.7981 29.3706 22.0374 29.4663C22.2768 29.562 22.5328 29.6092 22.7906 29.6049H24.8285V44.6984H6.48702C5.64248 44.6984 4.83256 44.3628 4.23539 43.7658C3.63822 43.1687 3.30273 42.3586 3.30273 41.5142Z" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                                <div>
+                                    <Typography variant="body1" sx={{ mb: 0, color: '#454545', fontWeight: 700, fontSize: '20px' }}>
+                                        Facebook Post Generator
+                                    </Typography>
+                                    <Typography style={{ width: '490px', fontSize: '14px', color: '#888888', fontFamily: 'Satoshi Variable', fontWeight: 500 }}>
+                                        Share your knowledge with our AI! It clears creative blocks and suggests topics that highlight your expertise.
+                                    </Typography>
+                                </div>
+
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: 10,
+                                        position: 'absolute',
+                                        right: '20px',
+                                    }}
+                                >
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M2 16C2 14.0307 2.09467 12.1733 2.21867 10.616C2.40533 8.264 4.26933 6.456 6.62267 6.292C8.884 6.13333 11.9733 6 16 6C20.0267 6 23.116 6.13333 25.3773 6.292C27.7307 6.456 29.5947 8.26533 29.7813 10.616C29.9053 12.1747 30 14.0293 30 16C30 18.04 29.8987 19.9587 29.768 21.5507C29.6881 22.6381 29.2161 23.6594 28.4396 24.4249C27.6631 25.1903 26.6351 25.6477 25.5467 25.712C23.2627 25.868 20.0667 26 16 26C11.9333 26 8.73733 25.868 6.45333 25.712C5.36491 25.6477 4.33687 25.1903 3.56039 24.4249C2.78392 23.6594 2.31186 22.6381 2.232 21.5507C2.08003 19.7043 2.00263 17.8526 2 16Z"
+                                            stroke="#1E1E1E"
+                                            strokeWidth="2.08717"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                        <path
+                                            d="M13.3334 20V12L20.6667 16L13.3334 20Z"
+                                            stroke="#1E1E1E"
+                                            strokeWidth="2.08717"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+
+                                    <Typography
+                                        style={{
+                                            width: '100px',
+                                            fontSize: '15px',
+                                            color: '#2E2E2E',
+                                            borderBottom: '1px solid #2E2E2E',
+                                        }}
+                                    >
+                                        How it works?
+                                    </Typography>
+                                </div>
+                            </div>
+                        </Box>
+
+                        <Box sx={{
+                            position: 'absolute',
+                            top: '11.7rem',
+                            // marginLeft:'305px',
+                            marginLeft: '24.5rem',
+                            height: 'auto',
+                            width: '495px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 1,
+                            backgroundColor: '#FFFFFF',
+                            borderBottomLeftRadius: '10px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                        }}>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, marginTop: 2, ml: 4, }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Describe your profession</FormLabel>
+                                <TextField
+                                    bgcolor='#D1D1D1'
+                                    size="small"
+                                    placeholder="Data scientist - Cybersecurity"
+                                    variant="outlined"
+                                    sx={{
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                    }} />
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        textTransform: 'none',
+                                        position: 'absolute',
+                                        ml: '19.2rem',
+                                        color: '#FFFFF',
+                                        width: '120px',
+                                        padding: '4px',
+                                        backgroundColor: '#000',
+                                        borderRadius: '8px',
+                                        marginTop: '1.9rem',
+                                    }}
+                                >
+                                    <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.18396 6.70986C3.30388 6.38578 3.76226 6.38578 3.88218 6.70986L4.07691 7.2361C4.11461 7.33799 4.19495 7.41833 4.29684 7.45603L4.82308 7.65076C5.14716 7.77068 5.14716 8.22906 4.82308 8.34898L4.29684 8.54371C4.19495 8.58141 4.11461 8.66174 4.07691 8.76363L3.88218 9.28988C3.76226 9.61396 3.30388 9.61396 3.18396 9.28988L2.98923 8.76363C2.95153 8.66174 2.8712 8.58141 2.76931 8.54371L2.24306 8.34898C1.91898 8.22906 1.91898 7.77068 2.24306 7.65076L2.76931 7.45603C2.8712 7.41833 2.95153 7.33799 2.98923 7.2361L3.18396 6.70986Z" fill="white" />
+                                        <path d="M6.90629 2.24306C7.02622 1.91898 7.48459 1.91898 7.60451 2.24306L8.00032 3.31272C8.03802 3.41461 8.11836 3.49494 8.22025 3.53264L9.2899 3.92845C9.61399 4.04837 9.61398 4.50675 9.2899 4.62667L8.22025 5.02248C8.11836 5.06018 8.03802 5.14051 8.00032 5.2424L7.60451 6.31206C7.48459 6.63614 7.02622 6.63614 6.90629 6.31206L6.51049 5.2424C6.47278 5.14051 6.39245 5.06018 6.29056 5.02248L5.22091 4.62667C4.89682 4.50675 4.89682 4.04837 5.22091 3.92845L6.29056 3.53264C6.39245 3.49494 6.47278 3.41461 6.51049 3.31272L6.90629 2.24306Z" fill="white" />
+                                        <path d="M9.88422 6.70986C10.0041 6.38578 10.4625 6.38578 10.5824 6.70986L11.3804 8.86633C11.4181 8.96822 11.4984 9.04855 11.6003 9.08626L13.7568 9.88422C14.0809 10.0041 14.0809 10.4625 13.7568 10.5824L11.6003 11.3804C11.4984 11.4181 11.4181 11.4984 11.3804 11.6003L10.5824 13.7568C10.4625 14.0809 10.0041 14.0809 9.88422 13.7568L9.08626 11.6003C9.04855 11.4984 8.96822 11.4181 8.86633 11.3804L6.70986 10.5824C6.38578 10.4625 6.38578 10.0041 6.70986 9.88422L8.86633 9.08626C8.96822 9.04855 9.04855 8.96822 9.08626 8.86633L9.88422 6.70986Z" fill="white" />
+                                    </svg>
+                                    Generate
+                                </Button>
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Enter your topic</FormLabel>
+                                <TextField
+                                    bgcolor='#D1D1D1'
+                                    size="small"
+                                    placeholder="Ex. Future of AI"
+                                    variant="outlined"
+                                    height="80px"
+                                    sx={{
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            height: '80px',
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                        '& .MuiOutlinedInput-input': {
+                                            padding: '8px 14px 50px',
+                                        },
+                                    }} />
+                            </FormControl>
 
                             <FormControl fullWidth sx={{ marginBottom: 1, ml: 4 }}>
                                 <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Your Writing Sample
@@ -1284,7 +2410,6 @@ const LinkdinPost = () => {
                                         },
                                     }} />
                             </FormControl>
-
 
                             <FormControl fullWidth sx={{ marginBottom: 1, ml: 4 }}>
                                 <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', bottom: '18px', }}>Your Thoughts</FormLabel>
@@ -1587,7 +2712,7 @@ const LinkdinPost = () => {
 
                         <Box sx={{
                             position: 'absolute',
-                            top: '11.2rem',
+                            top: '11.7rem',
                             left: '55.6rem',
                             height: '935px',
                             width: '551px',
@@ -1599,11 +2724,493 @@ const LinkdinPost = () => {
                         }}>
 
                             <Box sx={{ textAlign: 'center', marginTop: '420px' }}>
-                                <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4.66663 7H9.33329C10.622 7 11.6666 8.04467 11.6666 9.33333V46.6667C11.6666 47.9553 10.622 49 9.33329 49H4.66663" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M51.3334 7H46.6667C45.378 7 44.3334 8.04467 44.3334 9.33333V46.6667C44.3334 47.9553 45.378 49 46.6667 49H51.3334" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M37.3333 9.33333C37.3333 8.04467 36.2886 7 35 7H21C19.7113 7 18.6666 8.04467 18.6666 9.33333V46.6667C18.6666 47.9553 19.7113 49 21 49H35C36.2886 49 37.3333 47.9553 37.3333 46.6667V9.33333Z" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.30273 41.5142V6.48702C3.30273 5.64248 3.63822 4.83256 4.23539 4.23539C4.83256 3.63822 5.64248 3.30273 6.48702 3.30273H41.5142C42.3586 3.30273 43.1687 3.63822 43.7658 4.23539C44.3628 4.83256 44.6984 5.64248 44.6984 6.48702V41.5142C44.6984 42.3586 44.3628 43.1687 43.7658 43.7658C43.1687 44.3628 42.3586 44.6984 41.5142 44.6984H31.9613V29.6049H34.2222C34.7374 29.6049 35.2312 29.4003 35.5955 29.036C35.9598 28.6717 36.1646 28.1777 36.1646 27.6625V25.2106C36.1646 24.9555 36.1143 24.703 36.0168 24.4673C35.9191 24.2316 35.7761 24.0175 35.5955 23.8371C35.4153 23.6568 35.201 23.5137 34.9654 23.4161C34.7297 23.3185 34.4772 23.2682 34.2222 23.2682H32.0887V20.275C32.0887 17.6002 33.2987 17.6002 34.5087 17.6002H36.069C36.3254 17.6107 36.5807 17.5649 36.8173 17.4658C37.0539 17.3668 37.266 17.217 37.4383 17.027C37.6233 16.8509 37.7698 16.6382 37.8685 16.4025C37.9672 16.1668 38.0159 15.9132 38.0114 15.6578V13.3014C38.02 13.0421 37.9774 12.7837 37.8857 12.5409C37.7943 12.2981 37.6561 12.0757 37.4784 11.8864C37.301 11.6972 37.088 11.5447 36.8517 11.4378C36.6155 11.3309 36.3601 11.2717 36.1009 11.2634H32.4389C31.3705 11.2233 30.306 11.4155 29.319 11.8269C28.3321 12.2383 27.4462 12.8591 26.7226 13.6462C25.999 14.4335 25.4549 15.3683 25.1279 16.3864C24.8008 17.4044 24.6987 18.4812 24.8285 19.5426V23.2682H22.7906C22.5328 23.264 22.2768 23.3111 22.0374 23.4068C21.7981 23.5025 21.5802 23.6449 21.3965 23.8257C21.2127 24.0065 21.0668 24.2221 20.9671 24.4599C20.8675 24.6976 20.8163 24.9529 20.8163 25.2106V27.6625C20.8163 27.9203 20.8675 28.1755 20.9671 28.4133C21.0668 28.6511 21.2127 28.8666 21.3965 29.0474C21.5802 29.2282 21.7981 29.3706 22.0374 29.4663C22.2768 29.562 22.5328 29.6092 22.7906 29.6049H24.8285V44.6984H6.48702C5.64248 44.6984 4.83256 44.3628 4.23539 43.7658C3.63822 43.1687 3.30273 42.3586 3.30273 41.5142Z" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
+
+                                <Typography variant="subtitle2" color='#454545'>
+                                    Filling the form and hit Generate.
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </>
+                )}
+            </Box>
+
+
+            <Box sx={{ marginBottom: '550px' }}>
+                {selectedMenu === 'InstagramPostGenerator' && (
+                    <>
+                        <Box
+                            sx={{
+                                borderTopLeftRadius: '10px',
+                                borderTopRightRadius: '10px',
+                                padding: '12px 20px',
+                                borderBottom: '2px solid #ddd',
+                                bgcolor: '#FFFFFF',
+                                position: 'absolute',
+                                left: '60.3%',
+                                transform: 'translateX(-50%)',
+                                bottom: '73.1%',
+                                width: '90%',
+                                maxWidth: '1050px',
+                                height: 'auto',
+                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+
+                                [theme.breakpoints.down('md')]: {
+                                    width: '95%',
+                                    padding: '12px 15px',
+                                    bottom: '74.2%',
+                                },
+                            }}
+                        >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M34.6144 13.3128C34.1747 13.3128 33.8184 12.9564 33.8184 12.5168C33.8184 12.0771 34.1747 11.7207 34.6144 11.7207" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M34.6133 13.3128C35.053 13.3128 35.4094 12.9564 35.4094 12.5168C35.4094 12.0771 35.053 11.7207 34.6133 11.7207" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M4.44336 12.6366C4.44336 8.1116 8.11157 4.44336 12.6366 4.44336H34.4853C39.0101 4.44336 42.6784 8.1116 42.6784 12.6366V34.4852C42.6784 39.0101 39.0101 42.6784 34.4853 42.6784H12.6366C8.11157 42.6784 4.44336 39.0101 4.44336 34.4852V12.6366Z" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M15.4414 23.5613C15.4414 25.7149 16.2969 27.7802 17.8197 29.303C19.3425 30.8258 21.4078 31.6813 23.5613 31.6813C25.7149 31.6813 27.7802 30.8258 29.303 29.303C30.8258 27.7802 31.6813 25.7149 31.6813 23.5613C31.6813 21.4078 30.8258 19.3425 29.303 17.8197C27.7802 16.2969 25.7149 15.4414 23.5613 15.4414C21.4078 15.4414 19.3425 16.2969 17.8197 17.8197C16.2969 19.3425 15.4414 21.4078 15.4414 23.5613Z" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+
+                                <div>
+                                    <Typography variant="body1" sx={{ mb: 0, color: '#454545', fontWeight: 700, fontSize: '20px' }}>
+                                        Instagram Post Generator
+                                    </Typography>
+                                    <Typography style={{ width: '490px', fontSize: '14px', color: '#888888', fontFamily: 'Satoshi Variable', fontWeight: 500 }}>
+                                        Share your knowledge with our AI! It clears creative blocks and suggests topics that highlight your expertise.
+                                    </Typography>
+                                </div>
+
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: 10,
+                                        position: 'absolute',
+                                        right: '20px',
+                                    }}
+                                >
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M2 16C2 14.0307 2.09467 12.1733 2.21867 10.616C2.40533 8.264 4.26933 6.456 6.62267 6.292C8.884 6.13333 11.9733 6 16 6C20.0267 6 23.116 6.13333 25.3773 6.292C27.7307 6.456 29.5947 8.26533 29.7813 10.616C29.9053 12.1747 30 14.0293 30 16C30 18.04 29.8987 19.9587 29.768 21.5507C29.6881 22.6381 29.2161 23.6594 28.4396 24.4249C27.6631 25.1903 26.6351 25.6477 25.5467 25.712C23.2627 25.868 20.0667 26 16 26C11.9333 26 8.73733 25.868 6.45333 25.712C5.36491 25.6477 4.33687 25.1903 3.56039 24.4249C2.78392 23.6594 2.31186 22.6381 2.232 21.5507C2.08003 19.7043 2.00263 17.8526 2 16Z"
+                                            stroke="#1E1E1E"
+                                            strokeWidth="2.08717"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                        <path
+                                            d="M13.3334 20V12L20.6667 16L13.3334 20Z"
+                                            stroke="#1E1E1E"
+                                            strokeWidth="2.08717"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+
+                                    <Typography
+                                        style={{
+                                            width: '100px',
+                                            fontSize: '15px',
+                                            color: '#2E2E2E',
+                                            borderBottom: '1px solid #2E2E2E',
+                                        }}
+                                    >
+                                        How it works?
+                                    </Typography>
+                                </div>
+                            </div>
+                        </Box>
+
+                        <Box sx={{
+                            position: 'absolute',
+                            top: '11.7rem',
+                            // marginLeft:'305px',
+                            marginLeft: '24.5rem',
+                            height: 'auto',
+                            width: '495px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 1,
+                            backgroundColor: '#FFFFFF',
+                            borderBottomLeftRadius: '10px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                        }}>
+
+                            <FormControl
+                                fullWidth
+                                sx={{ marginBottom: 1, marginTop: 5, ml: 4 }}
+                            >
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', bottom: '18px' }}>
+                                    Image
+                                </FormLabel>
+                                <Button
+                                    variant="outlined"
+                                    component="label"
+                                    sx={{
+                                        position: 'relative',
+                                        bottom: 3,
+                                        textTransform: 'none',
+                                        borderColor: '#4F4F4F',
+                                        color: '#4F4F4F',
+                                        height: '150px',
+                                        width: '430px',
+                                        borderStyle: 'dotted',
+                                        borderWidth: '2px',
+                                        borderRadius: '10px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        textAlign: 'center', // Ensures text is centered
+                                        flexDirection: 'column', // Align logo and text in column
+                                    }}
+                                >
+                                    <svg
+                                        width="32"
+                                        height="32"
+                                        viewBox="0 0 32 32"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        style={{
+                                            marginBottom: '8px', // Space between logo and text
+                                        }}
+                                    >
+                                        <path
+                                            d="M5.84615 28H26.1538C27.1735 28 28 27.1735 28 26.1538V5.84615C28 4.82655 27.1735 4 26.1538 4H5.84615C4.82655 4 4 4.82655 4 5.84615V26.1538C4 27.1735 4.82655 28 5.84615 28Z"
+                                            stroke="#1E1E1E"
+                                            stroke-width="1.6"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M6.30731 27.9994L19.7842 15.2978C19.9501 15.1596 20.1591 15.084 20.375 15.084C20.5909 15.084 20.7999 15.1596 20.9658 15.2978L27.9996 20.3378"
+                                            stroke="#1E1E1E"
+                                            stroke-width="1.6"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M11.3851 14.1537C12.9145 14.1537 14.1544 12.9139 14.1544 11.3845C14.1544 9.85506 12.9145 8.61523 11.3851 8.61523C9.85573 8.61523 8.61591 9.85506 8.61591 11.3845C8.61591 12.9139 9.85573 14.1537 11.3851 14.1537Z"
+                                            stroke="#1E1E1E"
+                                            stroke-width="1.6"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+
+                                    <Typography sx={{ fontSize: '10px', color: '#1E1E1E', width: '180px' }}>Drop your image here, or click to select JPG, PNG, GIF files less than 10MB</Typography>
+
+                                    <input
+                                        type="file"
+                                        accept=".png, .jpg, .jpeg, .gif"
+                                        hidden
+                                        onChange={handleFileUpload}
+                                    />
+                                </Button>
+
+                                <Typography sx={{ fontSize: '10px' }}>If not uploaded, Will be generated with AI.</Typography>
+
+                                {imagePreview && (
+                                    <img
+                                        src={imagePreview}
+                                        alt="Preview"
+                                        style={{
+                                            marginTop: '10px',
+                                            maxWidth: '100%',
+                                            maxHeight: '200px',
+                                            borderRadius: '8px',
+                                            border: '1px solid #ddd',
+                                        }}
+                                    />
+                                )}
+
+                                {error && (
+                                    <Typography
+                                        color="error"
+                                        sx={{ marginTop: 2, fontSize: '14px' }}
+                                    >
+                                        {error}
+                                    </Typography>
+                                )}
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, marginTop: 2, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', bottom: '18px', }}>Your Thoughts</FormLabel>
+                                <TextField
+                                    bgcolor='#D1D1D1'
+                                    size="small"
+                                    placeholder="Let us know what you want to focus on..."
+                                    variant="outlined"
+                                    height="80px"
+                                    sx={{
+                                        position: 'relative',
+                                        bottom: '18px',
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            height: '80px',
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                        '& .MuiOutlinedInput-input': {
+                                            padding: '8px 14px 50px',
+                                        },
+                                    }} />
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, ml: 4, bottom: '18px', }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Writing tone</FormLabel>
+                                <div style={{ display: 'flex', gap: '5px', width: '440px', flexWrap: 'wrap' }}>
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '110px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Professional
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Helpful
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Persuasive
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Friendly
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Humorous
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Inspiring
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Formal
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Academic
+                                    </Button>
+
+                                    <div>
+                                        <Button
+                                            variant="outlined"
+                                            // onClick={handleButtonClick}
+                                            sx={{
+                                                fontSize: "14px",
+                                                textTransform: "none",
+                                                borderRadius: "50px",
+                                                color: "#B0B0B0",
+                                                height: "35px",
+                                                width: "100px",
+                                                backgroundColor: "#FFFFFF",
+                                                border: "1px solid #D1D1D1",
+                                                marginTop: 1,
+                                                gap: 1,
+                                            }}
+                                        >
+                                            <svg width="70" height="70" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.00078 2.66719V13.3328" stroke="#B0B0B0" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+                                                <path d="M2.66797 8H13.3336" stroke="#B0B0B0" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                            Custom
+                                        </Button>
+                                        {isBoxOpen && (
+                                            <Box
+                                                sx={{
+                                                    marginTop: 2,
+                                                    padding: 2,
+                                                    border: "1px solid #D1D1D1",
+                                                    borderRadius: "8px",
+                                                    backgroundColor: "#F9F9F9",
+                                                    width: "300px",
+                                                }}
+                                            >
+                                                <Typography variant="h6" sx={{ marginBottom: 2 }}>
+                                                    List of Items
+                                                </Typography>
+                                                <List>
+                                                    {items.map((item, index) => (
+                                                        <ListItem key={index}>{item}</ListItem>
+                                                    ))}
+                                                </List>
+                                            </Box>
+                                        )}
+                                    </div>
+                                </div>
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, ml: 4, bottom: '18px', }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', marginTop: '1px' }}>Post size (in characters)</FormLabel>
+                                <TextField
+                                    type="number"
+                                    bgcolor='#D1D1D1'
+                                    size="small"
+                                    placeholder="800"
+                                    variant="outlined"
+                                    sx={{
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                    }} />
+
+                            </FormControl>
+
+                            <Box
+                                sx={{
+                                    // display: 'flex',
+                                    // justifyContent: 'center', 
+                                    marginLeft: '120px'
+                                }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        textTransform: 'none',
+                                        borderRadius: '50px',
+                                        ml: 4,
+                                        color: '#FFFFF',
+                                        width: '180px',
+                                        padding: '7px',
+                                        backgroundColor: '#000',
+                                        marginTop: 3,
+                                        bottom: '25px',
+                                        gap: 1
+                                    }}
+                                >
+                                    <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.18396 6.70986C3.30388 6.38578 3.76226 6.38578 3.88218 6.70986L4.07691 7.2361C4.11461 7.33799 4.19495 7.41833 4.29684 7.45603L4.82308 7.65076C5.14716 7.77068 5.14716 8.22906 4.82308 8.34898L4.29684 8.54371C4.19495 8.58141 4.11461 8.66174 4.07691 8.76363L3.88218 9.28988C3.76226 9.61396 3.30388 9.61396 3.18396 9.28988L2.98923 8.76363C2.95153 8.66174 2.8712 8.58141 2.76931 8.54371L2.24306 8.34898C1.91898 8.22906 1.91898 7.77068 2.24306 7.65076L2.76931 7.45603C2.8712 7.41833 2.95153 7.33799 2.98923 7.2361L3.18396 6.70986Z" fill="white" />
+                                        <path d="M6.90629 2.24306C7.02622 1.91898 7.48459 1.91898 7.60451 2.24306L8.00032 3.31272C8.03802 3.41461 8.11836 3.49494 8.22025 3.53264L9.2899 3.92845C9.61399 4.04837 9.61398 4.50675 9.2899 4.62667L8.22025 5.02248C8.11836 5.06018 8.03802 5.14051 8.00032 5.2424L7.60451 6.31206C7.48459 6.63614 7.02622 6.63614 6.90629 6.31206L6.51049 5.2424C6.47278 5.14051 6.39245 5.06018 6.29056 5.02248L5.22091 4.62667C4.89682 4.50675 4.89682 4.04837 5.22091 3.92845L6.29056 3.53264C6.39245 3.49494 6.47278 3.41461 6.51049 3.31272L6.90629 2.24306Z" fill="white" />
+                                        <path d="M9.88422 6.70986C10.0041 6.38578 10.4625 6.38578 10.5824 6.70986L11.3804 8.86633C11.4181 8.96822 11.4984 9.04855 11.6003 9.08626L13.7568 9.88422C14.0809 10.0041 14.0809 10.4625 13.7568 10.5824L11.6003 11.3804C11.4984 11.4181 11.4181 11.4984 11.3804 11.6003L10.5824 13.7568C10.4625 14.0809 10.0041 14.0809 9.88422 13.7568L9.08626 11.6003C9.04855 11.4984 8.96822 11.4181 8.86633 11.3804L6.70986 10.5824C6.38578 10.4625 6.38578 10.0041 6.70986 9.88422L8.86633 9.08626C8.96822 9.04855 9.04855 8.96822 9.08626 8.86633L9.88422 6.70986Z" fill="white" />
+                                    </svg>
+                                    Generate Post
+                                </Button>
+                            </Box>
+                        </Box>
+
+                        <Box sx={{
+                            position: 'absolute',
+                            top: '11.7rem',
+                            left: '55.6rem',
+                            height: '714px',
+                            width: '551px',
+                            // display: 'flex',
+                            // flexDirection: 'column',
+                            backgroundColor: '#FFFFFF',
+                            borderBottomRightRadius: '10px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                        }}>
+
+                            <Box sx={{ textAlign: 'center', marginTop: '320px' }}>
+                                <svg width="56" height="57" viewBox="0 0 56 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M40.3835 16.0313C39.8704 16.0313 39.4547 15.6155 39.4547 15.1026C39.4547 14.5896 39.8704 14.1738 40.3835 14.1738" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M40.3821 16.0313C40.8951 16.0313 41.3108 15.6155 41.3108 15.1026C41.3108 14.5896 40.8951 14.1738 40.3821 14.1738" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M5.1842 15.2423C5.1842 9.96321 9.46379 5.68359 14.743 5.68359H40.2331C45.5121 5.68359 49.7918 9.96321 49.7918 15.2423V40.7324C49.7918 46.0114 45.5121 50.2911 40.2331 50.2911H14.743C9.46379 50.2911 5.1842 46.0114 5.1842 40.7324V15.2423Z" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M18.0153 27.9889C18.0153 30.5013 19.0133 32.9109 20.7899 34.6875C22.5665 36.4641 24.976 37.4621 27.4885 37.4621C30.001 37.4621 32.4105 36.4641 34.1871 34.6875C35.9637 32.9109 36.9618 30.5013 36.9618 27.9889C36.9618 25.4764 35.9637 23.0669 34.1871 21.2903C32.4105 19.5137 30.001 18.5156 27.4885 18.5156C24.976 18.5156 22.5665 19.5137 20.7899 21.2903C19.0133 23.0669 18.0153 25.4764 18.0153 27.9889Z" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
 
                                 <Typography variant="subtitle2" color='#454545'>
                                     Filling the form and hit Generate.
