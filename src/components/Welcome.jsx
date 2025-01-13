@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Typography, Box, Container } from '@mui/material';
-import AcUnitIcon from '@mui/icons-material/AcUnit';
 
 const WelcomePage = () => {
     return (

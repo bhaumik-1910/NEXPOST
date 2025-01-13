@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Header from './Header'
 import { Box, Typography, Divider, List, ListItem, Slider, ListItemIcon, ListItemText, IconButton, Drawer, } from '@mui/material';
+import { Stepper, Step, StepLabel, } from '@mui/material';
 import { ThemeProvider, createTheme, CssBaseline, Switch } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -18,12 +19,16 @@ const theme = createTheme({
     },
 });
 
+
 const data = [
     { date: 'Jan 28, 2025', status: 'Up coming', amount: '$ 2.99', statusColor: 'warning' },
     { date: 'Dec 28, 2024', status: 'Paid', amount: '$ 2.99', statusColor: 'success' },
     { date: 'Nov 22, 2024', status: 'Delay', amount: '$ 2.99', statusColor: 'error' },
     { date: 'Oct 28, 2024', status: 'Paid', amount: '$ 2.99', statusColor: 'success' },
 ];
+
+
+const steps = ['Subreddit Scout', 'Create Post'];
 
 const LinkdinPost = () => {
 
@@ -102,6 +107,23 @@ const LinkdinPost = () => {
             reader.readAsDataURL(file);
         }
     };
+
+
+    const [activeStep, setActiveStep] = useState(0);
+
+    const handleNext = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    };
+
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+
+    const handleReset = () => {
+        setActiveStep(0);
+    };
+
+
 
     return (
         <ThemeProvider theme={theme} >
@@ -694,6 +716,7 @@ const LinkdinPost = () => {
                                         backgroundColor: '#000',
                                         borderRadius: '8px',
                                         marginTop: '1.9rem',
+                                        gap:1
                                     }}
                                 >
                                     <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1240,6 +1263,7 @@ const LinkdinPost = () => {
                                         backgroundColor: '#000',
                                         borderRadius: '8px',
                                         marginTop: '1.9rem',
+                                        gap:1
                                     }}
                                 >
                                     <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2338,6 +2362,7 @@ const LinkdinPost = () => {
                                         backgroundColor: '#000',
                                         borderRadius: '8px',
                                         marginTop: '1.9rem',
+                                        gap:1
                                     }}
                                 >
                                     <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2736,7 +2761,6 @@ const LinkdinPost = () => {
                     </>
                 )}
             </Box>
-
 
             <Box sx={{ marginBottom: '550px' }}>
                 {selectedMenu === 'InstagramPostGenerator' && (
@@ -3220,6 +3244,1501 @@ const LinkdinPost = () => {
                     </>
                 )}
             </Box>
+
+            <Box sx={{ marginBottom: '550px' }}>
+                {selectedMenu === 'RedditPostGenerator' && (
+                    <>
+                        <Box
+                            sx={{
+                                borderTopLeftRadius: '10px',
+                                borderTopRightRadius: '10px',
+                                padding: '12px 20px',
+                                borderBottom: '2px solid #ddd',
+                                bgcolor: '#FFFFFF',
+                                position: 'absolute',
+                                left: '60.3%',
+                                transform: 'translateX(-50%)',
+                                bottom: '73.1%',
+                                width: '90%',
+                                maxWidth: '1050px',
+                                height: 'auto',
+                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+
+                                [theme.breakpoints.down('md')]: {
+                                    width: '95%',
+                                    padding: '12px 15px',
+                                    bottom: '74.2%',
+                                },
+                            }}
+                        >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_193_15641)">
+                                        <path d="M24.9504 15.5234C29.9937 15.5234 34.5266 17.0966 37.6635 19.5992C38.7366 19.2231 39.9088 19.2434 40.9683 19.6565C42.0277 20.0696 42.9043 20.8482 43.4396 21.8514C43.9748 22.8547 44.1333 24.0164 43.8864 25.1264C43.6395 26.2364 43.0035 27.2214 42.0935 27.9032C42.0935 34.7407 34.4181 40.283 24.9523 40.283C15.6675 40.283 8.10627 34.9502 7.81106 28.2956L5.90648 27.9032C4.99645 27.2214 4.36047 26.2364 4.11359 25.1264C3.8667 24.0164 4.02521 22.8547 4.56045 21.8514C5.09568 20.8482 5.97229 20.0696 7.03172 19.6565C8.09115 19.2434 9.26344 19.2231 10.3365 19.5992C13.4715 17.0985 18.0044 15.5234 23.0477 15.5234H24.9504Z" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M24.9531 15.5229L26.8577 6L38.2852 7.90458" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M36.375 7.90458C36.375 8.40971 36.5757 8.89414 36.9328 9.25132C37.29 9.6085 37.7745 9.80916 38.2796 9.80916C38.7847 9.80916 39.2691 9.6085 39.6263 9.25132C39.9835 8.89414 40.1842 8.40971 40.1842 7.90458C40.1842 7.39945 39.9835 6.91502 39.6263 6.55784C39.2691 6.20066 38.7847 6 38.2796 6C37.7745 6 37.29 6.20066 36.9328 6.55784C36.5757 6.91502 36.375 7.39945 36.375 7.90458Z" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M19.2374 25.9983C19.7634 25.9983 20.1897 25.572 20.1897 25.046C20.1897 24.5201 19.7634 24.0938 19.2374 24.0938C18.7115 24.0938 18.2852 24.5201 18.2852 25.046C18.2852 25.572 18.7115 25.9983 19.2374 25.9983Z" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M30.6632 25.9983C31.1892 25.9983 31.6155 25.572 31.6155 25.046C31.6155 24.5201 31.1892 24.0938 30.6632 24.0938C30.1373 24.0938 29.7109 24.5201 29.7109 25.046C29.7109 25.572 30.1373 25.9983 30.6632 25.9983Z" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M21.1406 32.6641C22.411 33.2983 23.6794 33.6164 24.9498 33.6164C26.2201 33.6164 27.4886 33.2983 28.7589 32.6641" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_193_15641">
+                                            <rect width="48" height="48" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+
+                                <div>
+                                    <Typography variant="body1" sx={{ mb: 0, color: '#454545', fontWeight: 700, fontSize: '20px' }}>
+                                        Reddit Post Generator
+                                    </Typography>
+                                    <Typography style={{ width: '490px', fontSize: '14px', color: '#888888', fontFamily: 'Satoshi Variable', fontWeight: 500 }}>
+                                        Share your knowledge with our AI! It clears creative blocks and suggests topics that highlight your expertise.
+                                    </Typography>
+                                </div>
+
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: 10,
+                                        position: 'absolute',
+                                        right: '20px',
+                                    }}
+                                >
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M2 16C2 14.0307 2.09467 12.1733 2.21867 10.616C2.40533 8.264 4.26933 6.456 6.62267 6.292C8.884 6.13333 11.9733 6 16 6C20.0267 6 23.116 6.13333 25.3773 6.292C27.7307 6.456 29.5947 8.26533 29.7813 10.616C29.9053 12.1747 30 14.0293 30 16C30 18.04 29.8987 19.9587 29.768 21.5507C29.6881 22.6381 29.2161 23.6594 28.4396 24.4249C27.6631 25.1903 26.6351 25.6477 25.5467 25.712C23.2627 25.868 20.0667 26 16 26C11.9333 26 8.73733 25.868 6.45333 25.712C5.36491 25.6477 4.33687 25.1903 3.56039 24.4249C2.78392 23.6594 2.31186 22.6381 2.232 21.5507C2.08003 19.7043 2.00263 17.8526 2 16Z"
+                                            stroke="#1E1E1E"
+                                            strokeWidth="2.08717"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                        <path
+                                            d="M13.3334 20V12L20.6667 16L13.3334 20Z"
+                                            stroke="#1E1E1E"
+                                            strokeWidth="2.08717"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+
+                                    <Typography
+                                        style={{
+                                            width: '100px',
+                                            fontSize: '15px',
+                                            color: '#2E2E2E',
+                                            borderBottom: '1px solid #2E2E2E',
+                                        }}
+                                    >
+                                        How it works?
+                                    </Typography>
+                                </div>
+                            </div>
+                        </Box>
+
+                        <Box sx={{
+                            position: 'absolute',
+                            top: '11.7rem',
+                            // marginLeft:'305px',
+                            marginLeft: '24.5rem',
+                            height: 'auto',
+                            width: '495px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 1,
+                            backgroundColor: '#FFFFFF',
+                            borderBottomLeftRadius: '10px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                        }}>
+
+                            <Box sx={{ width: '100%', padding: '20px' }}>
+                                <Stepper activeStep={activeStep}>
+                                    {steps.map((label, index) => (
+                                        <Step key={label} completed={activeStep > index}>
+                                            <StepLabel>{label}</StepLabel>
+                                        </Step>
+                                    ))}
+                                </Stepper>
+
+                                <Box sx={{ mt: 4 }}>
+                                    {activeStep === steps.length ? (
+                                        <Box>
+                                            <Typography sx={{ mb: 2 }}>All steps completed! 🎉</Typography>
+                                            <Button onClick={handleReset} variant="outlined">
+                                                Reset
+                                            </Button>
+                                        </Box>
+                                    ) : (
+                                        <Box>
+                                            <Typography sx={{ mb: 2 }}>
+                                                {activeStep === 0
+                                                    ?
+                                                    <>
+                                                        <FormControl fullWidth sx={{ marginBottom: 1, marginTop: 1, ml: '0.7rem' }}>
+                                                            <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', bottom: '18px', }}>Your Industry</FormLabel>
+                                                            <TextField
+                                                                bgcolor='#D1D1D1'
+                                                                size="small"
+                                                                placeholder="Data scientist - Cybersecurity"
+                                                                variant="outlined"
+                                                                height="80px"
+                                                                sx={{
+                                                                    position: 'relative',
+                                                                    bottom: '18px',
+                                                                    borderRadius: '8px',
+                                                                    padding: '4px 0px',
+                                                                    width: '430px',
+                                                                    '& .MuiInputBase-root': {
+                                                                        height: '80px',
+                                                                        backgroundColor: '#F6F6F6',
+                                                                        color: '#6D6D6D'
+                                                                    },
+                                                                    '& .MuiOutlinedInput-input': {
+                                                                        padding: '8px 14px 50px',
+                                                                    },
+                                                                }} />
+                                                        </FormControl>
+
+                                                        <FormControl fullWidth sx={{ marginBottom: 1, marginTop: 1, ml: '0.7rem' }}>
+                                                            <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', bottom: '18px', }}>Advertising Topic</FormLabel>
+                                                            <TextField
+                                                                bgcolor='#D1D1D1'
+                                                                size="small"
+                                                                placeholder="Data scientist - Cybersecurity"
+                                                                variant="outlined"
+                                                                height="80px"
+                                                                sx={{
+                                                                    position: 'relative',
+                                                                    bottom: '18px',
+                                                                    borderRadius: '8px',
+                                                                    padding: '4px 0px',
+                                                                    width: '430px',
+                                                                    '& .MuiInputBase-root': {
+                                                                        height: '80px',
+                                                                        backgroundColor: '#F6F6F6',
+                                                                        color: '#6D6D6D'
+                                                                    },
+                                                                    '& .MuiOutlinedInput-input': {
+                                                                        padding: '8px 14px 50px',
+                                                                    },
+                                                                }} />
+                                                        </FormControl>
+
+                                                        <FormControl fullWidth sx={{ marginBottom: 1, ml: '0.7rem', bottom: '18px', }}>
+                                                            <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Audience</FormLabel>
+                                                            <div style={{ display: 'flex', gap: '5px', width: '440px', flexWrap: 'wrap' }}>
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '120px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Young Adults
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '105px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Professionals
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '100px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Seniors
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '100px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Students
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '105px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Homeowners
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '145px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Tech Enthusiasts
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '145px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Luxury Shoppers
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '300px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Environmentally Conscious Consumers
+                                                                </Button>
+
+                                                                <div>
+                                                                    <Button
+                                                                        variant="outlined"
+                                                                        // onClick={handleButtonClick}
+                                                                        sx={{
+                                                                            fontSize: "14px",
+                                                                            textTransform: "none",
+                                                                            borderRadius: "50px",
+                                                                            color: "#B0B0B0",
+                                                                            height: "35px",
+                                                                            width: "100px",
+                                                                            backgroundColor: "#FFFFFF",
+                                                                            border: "1px solid #D1D1D1",
+                                                                            marginTop: 1,
+                                                                            gap: 1,
+                                                                        }}
+                                                                    >
+                                                                        <svg width="70" height="70" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path d="M8.00078 2.66719V13.3328" stroke="#B0B0B0" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+                                                                            <path d="M2.66797 8H13.3336" stroke="#B0B0B0" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+                                                                        </svg>
+                                                                        Custom
+                                                                    </Button>
+                                                                    {isBoxOpen && (
+                                                                        <Box
+                                                                            sx={{
+                                                                                marginTop: 2,
+                                                                                padding: 2,
+                                                                                border: "1px solid #D1D1D1",
+                                                                                borderRadius: "8px",
+                                                                                backgroundColor: "#F9F9F9",
+                                                                                width: "300px",
+                                                                            }}
+                                                                        >
+                                                                            <Typography variant="h6" sx={{ marginBottom: 2 }}>
+                                                                                List of Items
+                                                                            </Typography>
+                                                                            <List>
+                                                                                {items.map((item, index) => (
+                                                                                    <ListItem key={index}>{item}</ListItem>
+                                                                                ))}
+                                                                            </List>
+                                                                        </Box>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        </FormControl>
+
+                                                        <FormControl fullWidth sx={{ marginBottom: 1, marginTop: 1, ml: '0.7rem' }}>
+                                                            <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', bottom: '18px', }}>Audience (If none of above)</FormLabel>
+                                                            <TextField
+                                                                bgcolor='#D1D1D1'
+                                                                size="small"
+                                                                placeholder="Data scientist - Cybersecurity"
+                                                                variant="outlined"
+                                                                height="80px"
+                                                                sx={{
+                                                                    position: 'relative',
+                                                                    bottom: '18px',
+                                                                    borderRadius: '8px',
+                                                                    padding: '4px 0px',
+                                                                    width: '430px',
+                                                                    '& .MuiInputBase-root': {
+                                                                        height: '40px',
+                                                                        backgroundColor: '#F6F6F6',
+                                                                        color: '#6D6D6D'
+                                                                    },
+                                                                    '& .MuiOutlinedInput-input': {
+                                                                        padding: '8px 14px 10px',
+                                                                    },
+                                                                }} />
+                                                        </FormControl>
+                                                    </>
+
+                                                    :
+                                                    <>
+                                                        <FormControl fullWidth sx={{ marginBottom: 2, ml: '0.7rem', bottom: '11px', }}>
+                                                            <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Target Subreddit</FormLabel>
+                                                            <div style={{ display: 'flex', gap: '5px', width: '440px', flexWrap: 'wrap' }}>
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '120px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >r/subreddit 1
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '120px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >r/subreddit 2
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '120px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >r/subreddit 3
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '120px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >r/subreddit 4
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '120px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >r/subreddit 5
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '120px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >r/subreddit 6
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '120px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >r/subreddit 7
+                                                                </Button>
+
+                                                                <div>
+                                                                    <Button
+                                                                        variant="outlined"
+                                                                        // onClick={handleButtonClick}
+                                                                        sx={{
+                                                                            fontSize: "14px",
+                                                                            textTransform: "none",
+                                                                            borderRadius: "50px",
+                                                                            color: "#B0B0B0",
+                                                                            height: "35px",
+                                                                            width: "100px",
+                                                                            backgroundColor: "#FFFFFF",
+                                                                            border: "1px solid #D1D1D1",
+                                                                            marginTop: 1,
+                                                                            gap: 1,
+                                                                        }}
+                                                                    >
+                                                                        <svg width="70" height="70" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path d="M8.00078 2.66719V13.3328" stroke="#B0B0B0" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+                                                                            <path d="M2.66797 8H13.3336" stroke="#B0B0B0" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+                                                                        </svg>
+                                                                        Custom
+                                                                    </Button>
+                                                                    {isBoxOpen && (
+                                                                        <Box
+                                                                            sx={{
+                                                                                marginTop: 2,
+                                                                                padding: 2,
+                                                                                border: "1px solid #D1D1D1",
+                                                                                borderRadius: "8px",
+                                                                                backgroundColor: "#F9F9F9",
+                                                                                width: "300px",
+                                                                            }}
+                                                                        >
+                                                                            <Typography variant="h6" sx={{ marginBottom: 2 }}>
+                                                                                List of Items
+                                                                            </Typography>
+                                                                            <List>
+                                                                                {items.map((item, index) => (
+                                                                                    <ListItem key={index}>{item}</ListItem>
+                                                                                ))}
+                                                                            </List>
+                                                                        </Box>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        </FormControl>
+
+                                                        <FormControl fullWidth sx={{ marginBottom: 2, ml: '0.7rem', bottom: '11px', }}>
+                                                            <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Post Type</FormLabel>
+                                                            <div style={{ display: 'flex', gap: '5px', width: '440px', flexWrap: 'wrap' }}>
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '120px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Link Post
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '120px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Text Ads
+                                                                </Button>
+
+                                                                <div>
+                                                                    <Button
+                                                                        variant="outlined"
+                                                                        // onClick={handleButtonClick}
+                                                                        sx={{
+                                                                            fontSize: "14px",
+                                                                            textTransform: "none",
+                                                                            borderRadius: "50px",
+                                                                            color: "#B0B0B0",
+                                                                            height: "35px",
+                                                                            width: "100px",
+                                                                            backgroundColor: "#FFFFFF",
+                                                                            border: "1px solid #D1D1D1",
+                                                                            marginTop: 1,
+                                                                            gap: 1,
+                                                                        }}
+                                                                    >
+                                                                        <svg width="70" height="70" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path d="M8.00078 2.66719V13.3328" stroke="#B0B0B0" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+                                                                            <path d="M2.66797 8H13.3336" stroke="#B0B0B0" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+                                                                        </svg>
+                                                                        Custom
+                                                                    </Button>
+                                                                    {isBoxOpen && (
+                                                                        <Box
+                                                                            sx={{
+                                                                                marginTop: 2,
+                                                                                padding: 2,
+                                                                                border: "1px solid #D1D1D1",
+                                                                                borderRadius: "8px",
+                                                                                backgroundColor: "#F9F9F9",
+                                                                                width: "300px",
+                                                                            }}
+                                                                        >
+                                                                            <Typography variant="h6" sx={{ marginBottom: 2 }}>
+                                                                                List of Items
+                                                                            </Typography>
+                                                                            <List>
+                                                                                {items.map((item, index) => (
+                                                                                    <ListItem key={index}>{item}</ListItem>
+                                                                                ))}
+                                                                            </List>
+                                                                        </Box>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        </FormControl>
+
+                                                        <FormControl fullWidth sx={{ marginBottom: 1, ml: '0.7rem', bottom: '11px', }}>
+                                                            <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Writing tone</FormLabel>
+                                                            <div style={{ display: 'flex', gap: '5px', width: '440px', flexWrap: 'wrap' }}>
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '120px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Professional
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '90px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Helpful
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '105px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Persuasive
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '100px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Friendly
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '110px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Humorous
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '100px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Inspiring
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '90px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Formal
+                                                                </Button>
+
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    sx={{
+                                                                        fontSize: '14px',
+                                                                        textTransform: 'none',
+                                                                        borderRadius: '50px',
+                                                                        color: '#B0B0B0',
+                                                                        height: '35px',
+                                                                        width: '110px',
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        border: '1px solid #D1D1D1',
+                                                                        marginTop: 1,
+                                                                    }}
+                                                                >Academic
+                                                                </Button>
+
+                                                                <div>
+                                                                    <Button
+                                                                        variant="outlined"
+                                                                        // onClick={handleButtonClick}
+                                                                        sx={{
+                                                                            fontSize: "14px",
+                                                                            textTransform: "none",
+                                                                            borderRadius: "50px",
+                                                                            color: "#B0B0B0",
+                                                                            height: "35px",
+                                                                            width: "100px",
+                                                                            backgroundColor: "#FFFFFF",
+                                                                            border: "1px solid #D1D1D1",
+                                                                            marginTop: 1,
+                                                                            gap: 1,
+                                                                        }}
+                                                                    >
+                                                                        <svg width="70" height="70" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path d="M8.00078 2.66719V13.3328" stroke="#B0B0B0" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+                                                                            <path d="M2.66797 8H13.3336" stroke="#B0B0B0" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+                                                                        </svg>
+                                                                        Custom
+                                                                    </Button>
+                                                                    {isBoxOpen && (
+                                                                        <Box
+                                                                            sx={{
+                                                                                marginTop: 2,
+                                                                                padding: 2,
+                                                                                border: "1px solid #D1D1D1",
+                                                                                borderRadius: "8px",
+                                                                                backgroundColor: "#F9F9F9",
+                                                                                width: "300px",
+                                                                            }}
+                                                                        >
+                                                                            <Typography variant="h6" sx={{ marginBottom: 2 }}>
+                                                                                List of Items
+                                                                            </Typography>
+                                                                            <List>
+                                                                                {items.map((item, index) => (
+                                                                                    <ListItem key={index}>{item}</ListItem>
+                                                                                ))}
+                                                                            </List>
+                                                                        </Box>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        </FormControl>
+
+                                                        <FormControl fullWidth sx={{ marginBottom: 1, marginTop: 2, ml: '0.7rem' }}>
+                                                            <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', bottom: '18px', }}>Writing Style (optional)</FormLabel>
+                                                            <TextField
+                                                                bgcolor='#D1D1D1'
+                                                                size="small"
+                                                                placeholder="Paste your reddit post"
+                                                                variant="outlined"
+                                                                height="80px"
+                                                                sx={{
+                                                                    position: 'relative',
+                                                                    bottom: '18px',
+                                                                    borderRadius: '8px',
+                                                                    padding: '4px 0px',
+                                                                    width: '430px',
+                                                                    '& .MuiInputBase-root': {
+                                                                        height: '90px',
+                                                                        backgroundColor: '#F6F6F6',
+                                                                        color: '#6D6D6D'
+                                                                    },
+                                                                    '& .MuiOutlinedInput-input': {
+                                                                        padding: '8px 14px 60px',
+                                                                    },
+                                                                }} />
+                                                        </FormControl>
+
+                                                        <FormControl fullWidth sx={{ marginBottom: 1, marginTop: 1, ml: '0.7rem' }}>
+                                                            <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', bottom: '18px', }}>Post Objective</FormLabel>
+                                                            <TextField
+                                                                bgcolor='#D1D1D1'
+                                                                size="small"
+                                                                placeholder="Ex: to sell my products that do x,y,z"
+                                                                variant="outlined"
+                                                                height="80px"
+                                                                sx={{
+                                                                    position: 'relative',
+                                                                    bottom: '18px',
+                                                                    borderRadius: '8px',
+                                                                    padding: '4px 0px',
+                                                                    width: '430px',
+                                                                    '& .MuiInputBase-root': {
+                                                                        height: '90px',
+                                                                        backgroundColor: '#F6F6F6',
+                                                                        color: '#6D6D6D'
+                                                                    },
+                                                                    '& .MuiOutlinedInput-input': {
+                                                                        padding: '8px 14px 60px',
+                                                                    },
+                                                                }} />
+                                                        </FormControl>
+                                                    </>
+                                                }
+                                            </Typography>
+
+                                            <Box>
+                                                <Button
+                                                    disabled={activeStep === 0}
+                                                    onClick={handleBack}
+                                                    sx={{
+                                                        height: '45px',
+                                                        width: '90px',
+                                                        fontSize: 15,
+                                                        mr: 22,
+                                                        textTransform: 'none',
+                                                        color: '#000',
+                                                        borderRadius: '50px',
+                                                        borderColor: '#000',
+                                                        border: '1px solid',
+                                                    }}
+                                                    variant="outlined"
+                                                >
+                                                    Skip
+                                                </Button>
+
+                                                <Button
+                                                    sx={{
+                                                        height: '45px',
+                                                        width: '180px',
+                                                        fontSize: 15,
+                                                        mr: 1,
+                                                        textTransform: 'none',
+                                                        color: '#FFF',
+                                                        borderRadius: '50px',
+                                                        backgroundColor: '#000',
+                                                        border: '1px solid',
+                                                        gap: 1
+                                                    }}
+                                                    variant="contained"
+                                                    onClick={handleNext}
+                                                >
+                                                    {activeStep === steps.length - 1
+                                                        ? <>
+                                                            <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M3.18396 6.70986C3.30388 6.38578 3.76226 6.38578 3.88218 6.70986L4.07691 7.2361C4.11461 7.33799 4.19495 7.41833 4.29684 7.45603L4.82308 7.65076C5.14716 7.77068 5.14716 8.22906 4.82308 8.34898L4.29684 8.54371C4.19495 8.58141 4.11461 8.66174 4.07691 8.76363L3.88218 9.28988C3.76226 9.61396 3.30388 9.61396 3.18396 9.28988L2.98923 8.76363C2.95153 8.66174 2.8712 8.58141 2.76931 8.54371L2.24306 8.34898C1.91898 8.22906 1.91898 7.77068 2.24306 7.65076L2.76931 7.45603C2.8712 7.41833 2.95153 7.33799 2.98923 7.2361L3.18396 6.70986Z" fill="white" />
+                                                                <path d="M6.90629 2.24306C7.02622 1.91898 7.48459 1.91898 7.60451 2.24306L8.00032 3.31272C8.03802 3.41461 8.11836 3.49494 8.22025 3.53264L9.2899 3.92845C9.61399 4.04837 9.61398 4.50675 9.2899 4.62667L8.22025 5.02248C8.11836 5.06018 8.03802 5.14051 8.00032 5.2424L7.60451 6.31206C7.48459 6.63614 7.02622 6.63614 6.90629 6.31206L6.51049 5.2424C6.47278 5.14051 6.39245 5.06018 6.29056 5.02248L5.22091 4.62667C4.89682 4.50675 4.89682 4.04837 5.22091 3.92845L6.29056 3.53264C6.39245 3.49494 6.47278 3.41461 6.51049 3.31272L6.90629 2.24306Z" fill="white" />
+                                                                <path d="M9.88422 6.70986C10.0041 6.38578 10.4625 6.38578 10.5824 6.70986L11.3804 8.86633C11.4181 8.96822 11.4984 9.04855 11.6003 9.08626L13.7568 9.88422C14.0809 10.0041 14.0809 10.4625 13.7568 10.5824L11.6003 11.3804C11.4984 11.4181 11.4181 11.4984 11.3804 11.6003L10.5824 13.7568C10.4625 14.0809 10.0041 14.0809 9.88422 13.7568L9.08626 11.6003C9.04855 11.4984 8.96822 11.4181 8.86633 11.3804L6.70986 10.5824C6.38578 10.4625 6.38578 10.0041 6.70986 9.88422L8.86633 9.08626C8.96822 9.04855 9.04855 8.96822 9.08626 8.86633L9.88422 6.70986Z" fill="white" />
+                                                            </svg>
+                                                            <Typography>Generate Post</Typography>
+                                                        </>
+                                                        :
+                                                        <>
+                                                            <Typography>Next</Typography>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M9 18.1193L15.0596 12.0596L9 6" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                                                            </svg>
+                                                        </>
+                                                    }
+                                                </Button>
+                                            </Box>
+                                        </Box>
+                                    )}
+                                </Box>
+                            </Box>
+                        </Box>
+
+                        <Box sx={{
+                            position: 'absolute',
+                            top: '11.7rem',
+                            left: '55.6rem',
+                            height: '714px',
+                            width: '551px',
+                            // display: 'flex',
+                            // flexDirection: 'column',
+                            backgroundColor: '#FFFFFF',
+                            borderBottomRightRadius: '10px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                        }}>
+
+                            <Box sx={{ textAlign: 'center', marginTop: '320px' }}>
+                                <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_193_15739)">
+                                        <path d="M29.1087 18.1113C34.9926 18.1113 40.281 19.9467 43.9407 22.8664C45.1926 22.4276 46.5603 22.4513 47.7963 22.9332C49.0323 23.4151 50.055 24.3235 50.6794 25.494C51.3039 26.6645 51.4888 28.0198 51.2008 29.3148C50.9127 30.6098 50.1708 31.7589 49.1091 32.5544C49.1091 40.5314 40.1544 46.9975 29.111 46.9975C18.2787 46.9975 9.45728 40.7758 9.11287 33.0121L6.89086 32.5544C5.82915 31.7589 5.08718 30.6098 4.79914 29.3148C4.51111 28.0198 4.69604 26.6645 5.32048 25.494C5.94492 24.3235 6.96763 23.4151 8.20364 22.9332C9.43964 22.4513 10.8073 22.4276 12.0593 22.8664C15.7167 19.9489 21.0051 18.1113 26.889 18.1113H29.1087Z" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M29.1119 18.1101L31.3339 7L44.666 9.22201" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M42.4375 9.22201C42.4375 9.81132 42.6716 10.3765 43.0883 10.7932C43.505 11.2099 44.0702 11.444 44.6595 11.444C45.2488 11.444 45.814 11.2099 46.2307 10.7932C46.6474 10.3765 46.8815 9.81132 46.8815 9.22201C46.8815 8.6327 46.6474 8.06752 46.2307 7.65081C45.814 7.2341 45.2488 7 44.6595 7C44.0702 7 43.505 7.2341 43.0883 7.65081C42.6716 8.06752 42.4375 8.6327 42.4375 9.22201Z" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M22.4436 30.3314C23.0572 30.3314 23.5547 29.834 23.5547 29.2204C23.5547 28.6068 23.0572 28.1094 22.4436 28.1094C21.8301 28.1094 21.3326 28.6068 21.3326 29.2204C21.3326 29.834 21.8301 30.3314 22.4436 30.3314Z" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M35.7737 30.3314C36.3873 30.3314 36.8847 29.834 36.8847 29.2204C36.8847 28.6068 36.3873 28.1094 35.7737 28.1094C35.1601 28.1094 34.6627 28.6068 34.6627 29.2204C34.6627 29.834 35.1601 30.3314 35.7737 30.3314Z" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M24.6641 38.1074C26.1461 38.8474 27.626 39.2184 29.1081 39.2184C30.5902 39.2184 32.07 38.8474 33.5521 38.1074" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_193_15739">
+                                            <rect width="56" height="56" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+
+                                <Typography variant="subtitle2" color='#454545'>
+                                    Filling the form and hit Generate.
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </>
+                )}
+            </Box>
+
+            <Box sx={{ marginBottom: '550px' }}>
+                {selectedMenu === 'BlogGenerator' && (
+                    <>
+                        <Box
+                            sx={{
+                                borderTopLeftRadius: '10px',
+                                borderTopRightRadius: '10px',
+                                padding: '12px 20px',
+                                borderBottom: '2px solid #ddd',
+                                bgcolor: '#FFFFFF',
+                                position: 'absolute',
+                                left: '60.3%',
+                                transform: 'translateX(-50%)',
+                                bottom: '73.1%',
+                                width: '90%',
+                                maxWidth: '1050px',
+                                height: 'auto',
+                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+
+                                [theme.breakpoints.down('md')]: {
+                                    width: '95%',
+                                    padding: '12px 15px',
+                                    bottom: '74.2%',
+                                },
+                            }}
+                        >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M44.6965 16.04V36.7378C44.6965 37.7934 44.2771 38.806 43.5307 39.5524C42.7843 40.2988 41.7717 40.7182 40.7161 40.7182M40.7161 40.7182C39.6605 40.7182 38.6479 40.2988 37.9015 39.5524C37.1551 38.806 36.7358 37.7934 36.7358 36.7378V8.87535C36.7358 8.45308 36.568 8.0481 36.2696 7.74954C35.9709 7.45095 35.5659 7.2832 35.1436 7.2832H4.89292C4.47066 7.2832 4.06569 7.45095 3.76711 7.74954C3.46852 8.0481 3.30078 8.45308 3.30078 8.87535V37.5339C3.30078 38.3784 3.63627 39.1885 4.23344 39.7855C4.83061 40.3826 5.64053 40.7182 6.48507 40.7182H40.7161Z" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M27.1848 15.2441H12.8555V23.2049H27.1848V15.2441Z" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M12.8555 32.7578H27.1848" stroke="#1E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+
+                                <div>
+                                    <Typography variant="body1" sx={{ mb: 0, color: '#454545', fontWeight: 700, fontSize: '20px' }}>
+                                        Blog Generator
+                                    </Typography>
+                                    <Typography style={{ width: '490px', fontSize: '14px', color: '#888888', fontFamily: 'Satoshi Variable', fontWeight: 500 }}>
+                                        Share your knowledge with our AI! It clears creative blocks and suggests topics that highlight your expertise.
+                                    </Typography>
+                                </div>
+
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: 10,
+                                        position: 'absolute',
+                                        right: '20px',
+                                    }}
+                                >
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M2 16C2 14.0307 2.09467 12.1733 2.21867 10.616C2.40533 8.264 4.26933 6.456 6.62267 6.292C8.884 6.13333 11.9733 6 16 6C20.0267 6 23.116 6.13333 25.3773 6.292C27.7307 6.456 29.5947 8.26533 29.7813 10.616C29.9053 12.1747 30 14.0293 30 16C30 18.04 29.8987 19.9587 29.768 21.5507C29.6881 22.6381 29.2161 23.6594 28.4396 24.4249C27.6631 25.1903 26.6351 25.6477 25.5467 25.712C23.2627 25.868 20.0667 26 16 26C11.9333 26 8.73733 25.868 6.45333 25.712C5.36491 25.6477 4.33687 25.1903 3.56039 24.4249C2.78392 23.6594 2.31186 22.6381 2.232 21.5507C2.08003 19.7043 2.00263 17.8526 2 16Z"
+                                            stroke="#1E1E1E"
+                                            strokeWidth="2.08717"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                        <path
+                                            d="M13.3334 20V12L20.6667 16L13.3334 20Z"
+                                            stroke="#1E1E1E"
+                                            strokeWidth="2.08717"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+
+                                    <Typography
+                                        style={{
+                                            width: '100px',
+                                            fontSize: '15px',
+                                            color: '#2E2E2E',
+                                            borderBottom: '1px solid #2E2E2E',
+                                        }}
+                                    >
+                                        How it works?
+                                    </Typography>
+                                </div>
+                            </div>
+                        </Box>
+
+                        <Box sx={{
+                            position: 'absolute',
+                            top: '11.7rem',
+                            // marginLeft:'305px',
+                            marginLeft: '24.5rem',
+                            height: 'auto',
+                            width: '495px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 1,
+                            backgroundColor: '#FFFFFF',
+                            borderBottomLeftRadius: '10px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                        }}>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, marginTop: 2, ml: 4, }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Describe your profession</FormLabel>
+                                <TextField
+                                    bgcolor='#D1D1D1'
+                                    size="small"
+                                    placeholder="Business Manager"
+                                    variant="outlined"
+                                    sx={{
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                    }} />
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        textTransform: 'none',
+                                        position: 'absolute',
+                                        ml: '19.2rem',
+                                        color: '#FFFFF',
+                                        width: '120px',
+                                        padding: '4px',
+                                        backgroundColor: '#000',
+                                        borderRadius: '8px',
+                                        marginTop: '1.9rem',
+                                        gap:1
+                                    }}
+                                >
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5489 8.91324C10.8093 9.17359 10.8093 9.5957 10.5489 9.85605L8.94343 11.4616L10.5489 13.0671C10.8093 13.3274 10.8093 13.7495 10.5489 14.0099C10.2886 14.2702 9.86649 14.2702 9.60614 14.0099L7.52922 11.933C7.26887 11.6726 7.26887 11.2505 7.52922 10.9902L9.60614 8.91324C9.86649 8.65289 10.2886 8.65289 10.5489 8.91324Z" fill="white" />
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.45232 1.99019C5.71267 1.72983 6.13478 1.72983 6.39513 1.99018L8.47205 4.0671C8.59708 4.19212 8.66731 4.36169 8.66731 4.5385C8.66732 4.71531 8.59708 4.88488 8.47205 5.00991L6.39513 7.08683C6.13478 7.34718 5.71267 7.34718 5.45232 7.08683C5.19197 6.82648 5.19197 6.40437 5.45232 6.14402L7.05784 4.5385L5.45232 2.93299C5.19197 2.67265 5.19197 2.25054 5.45232 1.99019Z" fill="white" />
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.1032 4.53848C10.1032 4.1703 10.4017 3.87182 10.7699 3.87182H12.8211C13.0831 3.87182 13.3383 3.88115 13.5633 3.92509C13.7952 3.97036 14.0533 4.0631 14.2646 4.27448C14.476 4.48586 14.5688 4.74388 14.614 4.97579C14.658 5.20085 14.6673 5.45598 14.6673 5.71797V10.2821C14.6673 10.5441 14.658 10.7992 14.614 11.0243C14.5688 11.2562 14.476 11.5142 14.2646 11.7256C14.0533 11.9369 13.7952 12.0297 13.5633 12.075C13.3383 12.1189 13.0831 12.1282 12.8211 12.1282H8.00062C7.63243 12.1282 7.33395 11.8298 7.33395 11.4616C7.33395 11.0934 7.63243 10.7949 8.00062 10.7949H12.8211C13.0671 10.7949 13.214 10.7844 13.3058 10.7667C13.3235 10.6749 13.334 10.528 13.334 10.2821V5.71797C13.334 5.472 13.3235 5.32514 13.3058 5.23331C13.214 5.21565 13.0671 5.20515 12.8211 5.20515H10.7699C10.4017 5.20515 10.1032 4.90667 10.1032 4.53848Z" fill="white" />
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.43795 3.92509C2.66301 3.88115 2.91814 3.87182 3.18014 3.87182H8.00065C8.36884 3.87182 8.66731 4.17031 8.66731 4.5385C8.66731 4.90669 8.36884 5.20515 8.00065 5.20515H3.18014C2.93416 5.20515 2.78731 5.21565 2.69548 5.23332C2.67782 5.32514 2.66732 5.47199 2.66732 5.71797V10.2821C2.66732 10.5281 2.67782 10.6749 2.69548 10.7667C2.78731 10.7844 2.93416 10.7949 3.18014 10.7949H5.23142C5.59961 10.7949 5.89809 11.0934 5.89809 11.4616C5.89809 11.8298 5.59961 12.1282 5.23142 12.1282H3.18014C2.91814 12.1282 2.66301 12.1189 2.43795 12.075C2.20603 12.0297 1.94801 11.9369 1.73664 11.7256C1.52526 11.5142 1.43253 11.2562 1.38725 11.0243C1.34331 10.7992 1.33398 10.5441 1.33398 10.2821V5.71797C1.33398 5.45597 1.34331 5.20084 1.38725 4.97578C1.43253 4.74387 1.52526 4.48585 1.73664 4.27447C1.94801 4.0631 2.20603 3.97037 2.43795 3.92509Z" fill="white" />
+                                    </svg>
+                                    Regenerate
+                                </Button>
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Enter your topic</FormLabel>
+                                <TextField
+                                    bgcolor='#D1D1D1'
+                                    size="small"
+                                    placeholder="The Future of AI in Business"
+                                    variant="outlined"
+                                    height="80px"
+                                    sx={{
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            height: '80px',
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                        '& .MuiOutlinedInput-input': {
+                                            padding: '8px 14px 50px',
+                                        },
+                                    }} />
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Your Writing Sample
+                                    <Typography
+                                        style={{
+                                            position: 'relative',
+                                            left: '310px',
+                                            bottom: '23px',
+                                            width: '115px',
+                                            fontSize: '15px',
+                                            color: '#2E2E2E',
+                                            borderBottom: '1px solid #2E2E2E',
+                                        }}
+                                    >
+                                        Select Post type
+                                    </Typography>
+                                </FormLabel>
+                                <TextField
+                                    bgcolor='#D1D1D1'
+                                    size="small"
+                                    placeholder="Ex. Future of AI"
+                                    variant="outlined"
+                                    height="80px"
+                                    sx={{
+                                        position: 'relative',
+                                        bottom: '18px',
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            height: '100px',
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                        '& .MuiOutlinedInput-input': {
+                                            padding: '8px 14px 70px',
+                                        },
+                                    }} />
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, ml: 4 }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', bottom: '18px', }}>Your Thoughts</FormLabel>
+                                <TextField
+                                    bgcolor='#D1D1D1'
+                                    size="small"
+                                    placeholder="Let us know what you want to focus on..."
+                                    variant="outlined"
+                                    height="80px"
+                                    sx={{
+                                        position: 'relative',
+                                        bottom: '18px',
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            height: '80px',
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                        '& .MuiOutlinedInput-input': {
+                                            padding: '8px 14px 50px',
+                                        },
+                                    }} />
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, ml: 4, bottom: '18px', }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Writing tone</FormLabel>
+                                <div style={{ display: 'flex', gap: '5px', width: '440px', flexWrap: 'wrap' }}>
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '110px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Professional
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Helpful
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Persuasive
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Friendly
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Humorous
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Inspiring
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Formal
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            textTransform: 'none',
+                                            borderRadius: '50px',
+                                            color: '#B0B0B0',
+                                            height: '35px',
+                                            width: '100px',
+                                            backgroundColor: '#FFFFFF',
+                                            border: '1px solid #D1D1D1',
+                                            marginTop: 1,
+                                        }}
+                                    >Academic
+                                    </Button>
+
+                                    <div>
+                                        <Button
+                                            variant="outlined"
+                                            // onClick={handleButtonClick}
+                                            sx={{
+                                                fontSize: "14px",
+                                                textTransform: "none",
+                                                borderRadius: "50px",
+                                                color: "#B0B0B0",
+                                                height: "35px",
+                                                width: "100px",
+                                                backgroundColor: "#FFFFFF",
+                                                border: "1px solid #D1D1D1",
+                                                marginTop: 1,
+                                                gap: 1,
+                                            }}
+                                        >
+                                            <svg width="70" height="70" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.00078 2.66719V13.3328" stroke="#B0B0B0" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+                                                <path d="M2.66797 8H13.3336" stroke="#B0B0B0" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                            Custom
+                                        </Button>
+                                        {isBoxOpen && (
+                                            <Box
+                                                sx={{
+                                                    marginTop: 2,
+                                                    padding: 2,
+                                                    border: "1px solid #D1D1D1",
+                                                    borderRadius: "8px",
+                                                    backgroundColor: "#F9F9F9",
+                                                    width: "300px",
+                                                }}
+                                            >
+                                                <Typography variant="h6" sx={{ marginBottom: 2 }}>
+                                                    List of Items
+                                                </Typography>
+                                                <List>
+                                                    {items.map((item, index) => (
+                                                        <ListItem key={index}>{item}</ListItem>
+                                                    ))}
+                                                </List>
+                                            </Box>
+                                        )}
+                                    </div>
+                                </div>
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, ml: 4, bottom: '18px', }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F' }}>Creativity Level
+                                    <Typography
+                                        sx={{
+                                            position: 'absolute',
+                                            flexGrow: 0,
+                                            fontSize: "16px",
+                                            fontWeight: 500,
+                                            color: "#9E9E9E",
+                                            marginLeft: "26rem",
+                                            marginTop: "-1.4rem",
+                                        }}
+                                    >
+                                        {value}
+                                    </Typography></FormLabel>
+
+                                <Box
+                                    sx={{
+                                        width: 415,
+                                        marginTop: "5px",
+                                    }}
+                                >
+
+                                    <Slider
+                                        value={value}
+                                        onChange={handleChange}
+                                        step={1}
+                                        marks
+                                        min={1}
+                                        max={5}
+                                        sx={{
+                                            flexGrow: 2,
+                                            color: "#000",
+                                            "& .MuiSlider-thumb": {
+                                                backgroundColor: "#000",
+                                            },
+                                            "& .MuiSlider-rail": {
+                                                backgroundColor: "#E0E0E0",
+                                            },
+                                        }} />
+                                </Box>
+                            </FormControl>
+
+                            <FormControl fullWidth sx={{ marginBottom: 1, ml: 4, bottom: '18px', }}>
+                                <FormLabel sx={{ fontSize: '16px', color: '#4F4F4F', marginTop: '1px' }}>Post size (in characters)</FormLabel>
+                                <TextField
+                                    type="number"
+                                    bgcolor='#D1D1D1'
+                                    size="small"
+                                    placeholder="800"
+                                    variant="outlined"
+                                    sx={{
+                                        borderRadius: '8px',
+                                        padding: '4px 0px',
+                                        width: '430px',
+                                        '& .MuiInputBase-root': {
+                                            backgroundColor: '#F6F6F6',
+                                            color: '#6D6D6D'
+                                        },
+                                    }} />
+
+                            </FormControl>
+
+                            <Box
+                                sx={{
+                                    // display: 'flex',
+                                    // justifyContent: 'center', 
+                                    marginLeft: '120px'
+                                }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        textTransform: 'none',
+                                        borderRadius: '50px',
+                                        ml: 4,
+                                        color: '#FFFFF',
+                                        width: '180px',
+                                        padding: '7px',
+                                        backgroundColor: '#000',
+                                        marginTop: 3,
+                                        bottom: '25px',
+                                        gap: 1
+                                    }}
+                                >
+                                    <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.18396 6.70986C3.30388 6.38578 3.76226 6.38578 3.88218 6.70986L4.07691 7.2361C4.11461 7.33799 4.19495 7.41833 4.29684 7.45603L4.82308 7.65076C5.14716 7.77068 5.14716 8.22906 4.82308 8.34898L4.29684 8.54371C4.19495 8.58141 4.11461 8.66174 4.07691 8.76363L3.88218 9.28988C3.76226 9.61396 3.30388 9.61396 3.18396 9.28988L2.98923 8.76363C2.95153 8.66174 2.8712 8.58141 2.76931 8.54371L2.24306 8.34898C1.91898 8.22906 1.91898 7.77068 2.24306 7.65076L2.76931 7.45603C2.8712 7.41833 2.95153 7.33799 2.98923 7.2361L3.18396 6.70986Z" fill="white" />
+                                        <path d="M6.90629 2.24306C7.02622 1.91898 7.48459 1.91898 7.60451 2.24306L8.00032 3.31272C8.03802 3.41461 8.11836 3.49494 8.22025 3.53264L9.2899 3.92845C9.61399 4.04837 9.61398 4.50675 9.2899 4.62667L8.22025 5.02248C8.11836 5.06018 8.03802 5.14051 8.00032 5.2424L7.60451 6.31206C7.48459 6.63614 7.02622 6.63614 6.90629 6.31206L6.51049 5.2424C6.47278 5.14051 6.39245 5.06018 6.29056 5.02248L5.22091 4.62667C4.89682 4.50675 4.89682 4.04837 5.22091 3.92845L6.29056 3.53264C6.39245 3.49494 6.47278 3.41461 6.51049 3.31272L6.90629 2.24306Z" fill="white" />
+                                        <path d="M9.88422 6.70986C10.0041 6.38578 10.4625 6.38578 10.5824 6.70986L11.3804 8.86633C11.4181 8.96822 11.4984 9.04855 11.6003 9.08626L13.7568 9.88422C14.0809 10.0041 14.0809 10.4625 13.7568 10.5824L11.6003 11.3804C11.4984 11.4181 11.4181 11.4984 11.3804 11.6003L10.5824 13.7568C10.4625 14.0809 10.0041 14.0809 9.88422 13.7568L9.08626 11.6003C9.04855 11.4984 8.96822 11.4181 8.86633 11.3804L6.70986 10.5824C6.38578 10.4625 6.38578 10.0041 6.70986 9.88422L8.86633 9.08626C8.96822 9.04855 9.04855 8.96822 9.08626 8.86633L9.88422 6.70986Z" fill="white" />
+                                    </svg>
+                                    Generate Blog
+                                </Button>
+                            </Box>
+                        </Box>
+
+                        <Box sx={{
+                            position: 'absolute',
+                            top: '11.7rem',
+                            left: '55.6rem',
+                            height: '935px',
+                            width: '551px',
+                            // display: 'flex',
+                            // flexDirection: 'column',
+                            backgroundColor: '#FFFFFF',
+                            borderBottomRightRadius: '10px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                        }}>
+
+                            <Box sx={{ textAlign: 'center', marginTop: '420px' }}>
+                                <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M52.1452 18.7123V42.8598C52.1452 44.0914 51.656 45.2727 50.7852 46.1435C49.9144 47.0143 48.733 47.5036 47.5015 47.5036M47.5015 47.5036C46.2699 47.5036 45.0886 47.0143 44.2178 46.1435C43.347 45.2727 42.8577 44.0914 42.8577 42.8598V10.3536C42.8577 9.86095 42.6619 9.38847 42.3138 9.04016C41.9654 8.6918 41.4928 8.49609 41.0002 8.49609H5.70772C5.21508 8.49609 4.74262 8.6918 4.39427 9.04016C4.04592 9.38847 3.85022 9.86095 3.85022 10.3536V43.7886C3.85022 44.7738 4.24162 45.7189 4.93832 46.4155C5.63502 47.112 6.57993 47.5036 7.56522 47.5036H47.5015Z" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M31.7148 17.7832H14.9973V27.0707H31.7148V17.7832Z" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M14.9973 38.2168H31.7148" stroke="#1E1E1E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                                <Typography variant="subtitle2" color='#454545'>
+                                    Filling the form and hit Generate.
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </>
+                )}
+            </Box>
+
         </ThemeProvider>
     )
 }
