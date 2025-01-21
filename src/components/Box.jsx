@@ -155,7 +155,7 @@
 
 
 import React from 'react';
-import { Card, CardMedia, CardContent, Typography, Box, Container } from '@mui/material';
+import { Card, CardContent, Typography, Box, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const MyCard = () => {
@@ -166,7 +166,7 @@ const MyCard = () => {
                     marginBottom: '20px',
                     '@media (max-width: 468px)': {
                         margin: {
-                            fontSize:'1.1rem',
+                            fontSize: '1rem',
                             position: 'relative',
                             bottom: 90,
                             right: 15,
@@ -181,7 +181,7 @@ const MyCard = () => {
                     display: 'flex',
                     flexWrap: 'wrap',
                     gap: '12px',
-                    borderRadius: '16px',
+                    // borderRadius: '16px',
                     '@media (max-width: 468px)': {
                         margin: {
                             position: 'relative',
@@ -200,7 +200,7 @@ const MyCard = () => {
                             '@media (max-width: 468px)': {
                                 width: 331,
                                 height: 87,
-                                borderRadius: 3,
+                                borderRadius: 1,
                             },
                         }} elevation={0}>
                         <CardContent>
@@ -214,7 +214,7 @@ const MyCard = () => {
                                     '@media (max-width: 468px)': {
                                         width: 110,
                                         height: 70,
-                                        borderRadius: 2,
+                                        borderRadius: 1,
                                         margin: {
                                             position: 'relative',
                                             bottom: 7,
@@ -244,7 +244,7 @@ const MyCard = () => {
                                         },
                                     },
                                 }}>
-                                LinkedIn Carousal Generator
+                                LinkedIn Post Generator
                             </Typography>
                             <Typography variant="body2"
                                 sx={{
@@ -265,23 +265,67 @@ const MyCard = () => {
                     </Card>
                 </Link>
 
-                {/* <Card sx={{ maxWidth: 270, minWidth: 250, maxHeight: 250 }} elevation={0}>
+                {/* <Card
+                    sx={{
+                        width: 270,
+                        height: 250,
+                        '@media (max-width: 468px)': {
+                            width: '100%',
+                            height: 87,
+                            borderRadius: 1,
+                        },
+                    }} elevation={0}>
                     <CardContent>
-                        <Card sx={{ maxWidth: 260, maxHeight: 200 }} elevation={0}>
-                            <CardMedia
-                                sx={{ height: 120, background: '#E7E7E7' }}
-                                image="/static/images/cards/contemplative-reptile.jpg"
-                                title="lizard-thumbnail"
-                            />
+                        <Card
+                            sx={{
+                                width: 235,
+                                height: 120,
+                                background: '#E7E7E7',
+                                '@media (max-width: 468px)': {
+                                    width: 110,
+                                    height: 70,
+                                    borderRadius: 1,
+                                    margin: {
+                                        position: 'relative',
+                                        bottom: 7,
+                                        right: 8,
+                                    },
+                                },
+                            }} elevation={0}>
                         </Card>
-                        <Typography gutterBottom component="div" sx={{ marginTop: 2 }}>
+                        <Typography gutterBottom component="div"
+                            sx={{
+                                color: '#2E2E2E',
+                                marginTop: 2,
+                                '@media (max-width: 468px)': {
+                                    fontSize: '0.9rem',
+                                    margin: {
+                                        position: 'relative',
+                                        bottom: 88,
+                                        left: 110,
+                                    },
+                                },
+                            }}>
                             LinkedIn Carousal Generator
                         </Typography>
-                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        <Typography variant="body2"
+                            sx={{
+                                color: 'text.secondary',
+                                '@media (max-width: 468px)': {
+                                    fontSize: '0.7rem',
+                                    margin: {
+                                        width: 200,
+                                        position: 'relative',
+                                        bottom: 88,
+                                        left: 110,
+                                    },
+                                },
+                            }}>
                             Creare a fun carousel with some cool and unique content!
                         </Typography>
                     </CardContent>
                 </Card> */}
+
 
                 {/* <Card sx={{ maxWidth: 270, minWidth: 250, maxHeight: 250 }} elevation={0}>
                     <CardContent>
@@ -381,7 +425,7 @@ const MyCard = () => {
                     </CardContent>
                 </Card>
             </Box> */}
-        </Container >
+        </Container>
     );
 };
 

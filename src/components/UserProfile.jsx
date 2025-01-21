@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Header from './Header'
 import {
     Box, Typography, Chip, useTheme,
     useMediaQuery,
@@ -18,6 +17,7 @@ import ReceiptLongOutlinedIcon from '@mui/icons-material/ReceiptLongOutlined';
 import RocketOutlinedIcon from '@mui/icons-material/RocketOutlined';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import Header from '../layout/Header';
 
 const theme = createTheme({
     palette: {
@@ -269,7 +269,6 @@ const UserProfile = () => {
                         flexDirection: 'column',
                         gap: 1,
                         backgroundColor: '#FFFFFF',
-                        borderRadius: '10px',
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                         '@media (max-width: 1124px)': {
                             left: '440px',

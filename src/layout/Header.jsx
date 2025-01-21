@@ -6,20 +6,20 @@ import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import InputBase from '@mui/material/InputBase';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import CloseIcon from '@mui/icons-material/Close';
-import { Typography, Stack, Chip, Button, Modal, Divider } from '@mui/material';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import ReceiptLongOutlinedIcon from '@mui/icons-material/ReceiptLongOutlined';
-import RocketOutlinedIcon from '@mui/icons-material/RocketOutlined';
-import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { Typography, Chip, Button, Modal, Divider } from '@mui/material';
 import { Link } from 'react-router-dom';
+import notification from "../assets/notification.svg";
+import search from "../assets/search.svg";
+import account from "../assets/account.svg";
+import bill from "../assets/bill.svg";
+import rocket from "../assets/rocket.svg";
+import changelog from "../assets/changelog.svg";
+import about from "../assets/about.svg";
+import logout from "../assets/logout.svg";
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -35,7 +35,7 @@ const Search = styled('div')(({ theme }) => ({
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(0, 1),
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -55,6 +55,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Header = () => {
+
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+
     const [activeTab, setActiveTab] = useState('monthly');
     const [openCard, setOpenCard] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -89,68 +93,17 @@ const Header = () => {
         }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    {/* <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href="#"
-                        sx={{
-                            // display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'Satoshi',
-                            fontWeight: 500,
-                            // letterSpacing: '.3rem',
-                            color: 'black',
-                            textDecoration: 'none',
-                            flexGrow: 1,
-                        }}>
-                        <Link to={'/'} style={{
-                            textDecoration: 'none',
-                            color: '#000',
-                            fontSize: '28px',
-                            fontWeight: 500,
-                            '&:hover': {
-                                color: '#007BFF',
-                                textDecoration: 'underline',
-                            },
-                        }}>
-                            NEXPOST
-                        </Link>
-                    </Typography>
-
-                    <Box sx={{ justifyContent: 'flex-start' }}>
-                        <Stack direction="row" spacing={1}>
-                            <Chip
-                                label="Free"
-                                variant="outlined"
-                                sx={{
-                                    padding: '4px 12px',
-                                    fontSize: '0.9rem',
-                                    borderColor: '#D1D1D1',
-                                }}
-                            />
-                            <Chip
-                                label="Pro"
-                                variant="outlined"
-                                sx={{
-                                    bgcolor: '#FFEAD6',
-                                    color: '#FF7C00',
-                                    padding: '4px 12px',
-                                    fontSize: '0.9rem',
-                                }}
-                                onClick={handleOpen} />
-                        </Stack>
-                    </Box> */}
-
                     <div className="container overflow-hidden">
                         <div className="row align-items-center">
                             <div className="col-lg-auto d-flex align-items-center gap-3 mb-lg-0">
+
                                 <Typography
                                     variant="h6"
                                     component="div"
                                     sx={{
-                                        fontFamily: 'Satoshi',
-                                        fontWeight: 500,
-                                        color: 'black',
+                                        // fontFamily: 'Satoshi',
+                                        // fontWeight: 500,
+                                        // color: 'black',
                                         textDecoration: 'none',
                                         fontSize: {
                                             xs: '20px',
@@ -158,11 +111,6 @@ const Header = () => {
                                             md: '26px',
                                             lg: '28px',
                                         },
-                                        // margin: {
-                                        //     position: 'relative',
-                                        //     right: 12,
-                                        //     // xs: '-10px',
-                                        // },
                                         '@media (max-width: 468px)': {
                                             margin: {
                                                 position: 'relative',
@@ -197,7 +145,7 @@ const Header = () => {
                                         height: {
                                             xs: '20px',
                                             sm: '40px',
-                                            md: '40px',
+                                            md: '30px',
                                         },
                                         padding: {
                                             xs: '1px 2px',
@@ -230,7 +178,7 @@ const Header = () => {
                                         height: {
                                             xs: '20px',
                                             sm: '40px',
-                                            md: '40px',
+                                            md: '30px',
                                         },
                                         padding: {
                                             xs: '1px 2px',
@@ -272,6 +220,14 @@ const Header = () => {
                                 height: 575,
                                 bgcolor: '#F6F6F6',
                                 borderRadius: '12px',
+                                '@media (max-width: 468px)': {
+                                    marginTop: 6,
+                                    width: 380
+                                },
+                                '@media (max-width: 1024px)': {
+                                    // width: '480px',
+                                    // height: 700
+                                },
                             }}>
                             <div className="card" style={{ backgroundColor: '#fff', width: '100%', position: 'relative' }}>
                                 <div className="card-header" style={{ position: 'relative' }}>
@@ -304,6 +260,10 @@ const Header = () => {
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                     // height: '64px'
+                                    '@media (max-width: 468px)': {
+                                        margin: '15px 6px',
+                                        width: '369px',
+                                    },
                                 }}>
                                 <div className="custom-tab-container">
                                     <ul className="nav nav-tabs" role="tablist">
@@ -314,7 +274,7 @@ const Header = () => {
                                                     // fontSize: '11px',
                                                     color: 'black',
                                                     backgroundColor: activeTab === 'monthly' ? '#fff' : ' #F1F1F1',
-                                                    borderRadius: '432px',
+                                                    borderRadius: 50,
                                                     padding: '7px 45px',
                                                     textAlign: 'center',
                                                 }}
@@ -334,7 +294,7 @@ const Header = () => {
                                                     // fontSize: '11px',
                                                     color: 'black',
                                                     backgroundColor: activeTab === 'annually' ? '#fff' : '#F1F1F1',
-                                                    borderRadius: '432px',
+                                                    borderRadius: 50,
                                                     padding: '6px 12px',
                                                     textAlign: 'center',
                                                 }}
@@ -368,6 +328,9 @@ const Header = () => {
                                     margin: '23px',
                                     borderRadius: '10px',
                                     boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+                                    '@media (max-width: 468px)': {
+                                        width: 335
+                                    },
                                 }}
                             >
                                 <div className="card-header">
@@ -437,21 +400,6 @@ const Header = () => {
                         </Box>
                     </Modal>
 
-                    {/* <Search sx={{ borderRadius: '150px' }}>
-                        <SearchIconWrapper>
-                            <svg sx={{ color: 'gray' }} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9.33694 17.2973C13.7335 17.2973 17.2976 13.7332 17.2976 9.33663C17.2976 4.94005 13.7335 1.37592 9.33694 1.37592C4.94035 1.37592 1.37622 4.94005 1.37622 9.33663C1.37622 13.7332 4.94035 17.2973 9.33694 17.2973Z" stroke="#5D5D5D" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M14.9631 14.9625L18.6251 18.6244" stroke="#5D5D5D" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Start tying to search.."
-                            inputProps={{ 'aria-label': 'search' }}
-                            sx={{ color: 'black' }}
-                        />
-                    </Search> */}
-
                     <Search
                         sx={{
                             borderRadius: '150px',
@@ -504,27 +452,14 @@ const Header = () => {
                                 alignItems: 'center',
                             }}
                         >
-                            <svg
-                                sx={{ color: 'gray' }}
-                                width="20"
-                                height="20"
-                                viewBox="0 0 20 20"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M9.33694 17.2973C13.7335 17.2973 17.2976 13.7332 17.2976 9.33663C17.2976 4.94005 13.7335 1.37592 9.33694 1.37592C4.94035 1.37592 1.37622 4.94005 1.37622 9.33663C1.37622 13.7332 4.94035 17.2973 9.33694 17.2973Z"
-                                    stroke="#5D5D5D"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                                <path
-                                    d="M14.9631 14.9625L18.6251 18.6244"
-                                    stroke="#5D5D5D"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
+                            <img
+                                src={search}
+                                alt="Custom Icon"
+                                style={{
+                                    width: "20px",
+                                    height: "20px",
+                                }}
+                            />
                         </SearchIconWrapper>
 
                         <StyledInputBase
@@ -549,80 +484,27 @@ const Header = () => {
                         />
                     </Search>
 
-                    {/* <IconButton size="large" sx={{ color: 'black', mr: 2 }}>
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18.408 29.9509H21.5922" stroke="#1E1E1E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M26.3686 18.0099C26.3686 16.3208 25.6977 14.7009 24.5033 13.5066C23.309 12.3123 21.6891 11.6413 20.0001 11.6413C18.311 11.6413 16.6912 12.3123 15.4968 13.5066C14.3025 14.7009 13.6315 16.3208 13.6315 18.0099V23.5824C13.6315 24.2158 13.3799 24.8233 12.932 25.2712C12.4841 25.719 11.8767 25.9706 11.2433 25.9706H28.7569C28.1235 25.9706 27.5159 25.719 27.0681 25.2712C26.6202 24.8233 26.3686 24.2158 26.3686 23.5824V18.0099Z" stroke="#1E1E1E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M9.65112 17.8029C9.65198 16.2874 10.0134 14.7938 10.7055 13.4456C11.3976 12.0974 12.4005 10.9332 13.6315 10.0491" stroke="#1E1E1E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M30.349 17.8029C30.3482 16.2874 29.9868 14.7938 29.2947 13.4456C28.6026 12.0974 27.5995 10.9332 26.3687 10.0491" stroke="#1E1E1E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    </IconButton> */}
-
                     <IconButton
                         size="medium"
                         sx={{
                             color: 'black',
                             mr: 1,
-                            svg: {
-                                width: '40px',
-                                height: '40px',
-                            },
-                            '@media (max-width: 1024px)': {
-                                svg: {
-                                    width: '40px',
-                                    height: '40px',
-                                },
-                            },
-                            '@media (max-width: 768px)': {
-                                svg: {
-                                    width: '40px',
-                                    height: '40px',
-                                },
-                            },
                             '@media (max-width: 468px)': {
                                 margin: {
                                     position: 'relative',
-                                    left: 10,
+                                    left: 4,
                                 },
                             },
                         }}
                     >
-                        <svg
-                            width="40"
-                            height="40"
-                            viewBox="0 0 40 40"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M18.408 29.9509H21.5922"
-                                stroke="#1E1E1E"
-                                strokeWidth="1.2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                            <path
-                                d="M26.3686 18.0099C26.3686 16.3208 25.6977 14.7009 24.5033 13.5066C23.309 12.3123 21.6891 11.6413 20.0001 11.6413C18.311 11.6413 16.6912 12.3123 15.4968 13.5066C14.3025 14.7009 13.6315 16.3208 13.6315 18.0099V23.5824C13.6315 24.2158 13.3799 24.8233 12.932 25.2712C12.4841 25.719 11.8767 25.9706 11.2433 25.9706H28.7569C28.1235 25.9706 27.5159 25.719 27.0681 25.2712C26.6202 24.8233 26.3686 24.2158 26.3686 23.5824V18.0099Z"
-                                stroke="#1E1E1E"
-                                strokeWidth="1.2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                            <path
-                                d="M9.65112 17.8029C9.65198 16.2874 10.0134 14.7938 10.7055 13.4456C11.3976 12.0974 12.4005 10.9332 13.6315 10.0491"
-                                stroke="#1E1E1E"
-                                strokeWidth="1.2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                            <path
-                                d="M30.349 17.8029C30.3482 16.2874 29.9868 14.7938 29.2947 13.4456C28.6026 12.0974 27.5995 10.9332 26.3687 10.0491"
-                                stroke="#1E1E1E"
-                                strokeWidth="1.2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
+                        <img
+                            src={notification}
+                            alt="Custom Icon"
+                            style={{
+                                width: "25px",
+                                height: "25px",
+                            }}
+                        />
                     </IconButton>
 
                     <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
@@ -672,15 +554,39 @@ const Header = () => {
                             />
 
                             <MenuItem onClick={handleCloseMenu}>
-                                <AccountCircleOutlinedIcon height="24px" width="24px" sx={{ mr: 1 }} />
+                                <img
+                                    src={account}
+                                    alt="Custom Icon"
+                                    style={{
+                                        width: "24px",
+                                        height: "24px",
+                                        marginRight: 10
+                                    }}
+                                />
                                 My Account
                             </MenuItem>
                             <MenuItem onClick={handleCloseMenu}>
-                                <ReceiptLongOutlinedIcon height="24px" width="24px" sx={{ mr: 1 }} />
+                                <img
+                                    src={bill}
+                                    alt="Custom Icon"
+                                    style={{
+                                        width: "24px",
+                                        height: "24px",
+                                        marginRight: 10
+                                    }}
+                                />
                                 Billing
                             </MenuItem>
                             <MenuItem onClick={handleCloseMenu}>
-                                <RocketOutlinedIcon height="24px" width="24px" sx={{ mr: 1 }} />
+                                <img
+                                    src={rocket}
+                                    alt="Custom Icon"
+                                    style={{
+                                        width: "24px",
+                                        height: "24px",
+                                        marginRight: 10
+                                    }}
+                                />
                                 Upgrade Plan
                             </MenuItem>
 
@@ -693,11 +599,27 @@ const Header = () => {
                             />
 
                             <MenuItem onClick={handleCloseMenu}>
-                                <HistoryOutlinedIcon height="24px" width="24px" sx={{ mr: 1 }} />
+                                <img
+                                    src={changelog}
+                                    alt="Custom Icon"
+                                    style={{
+                                        width: "24px",
+                                        height: "24px",
+                                        marginRight: 10
+                                    }}
+                                />
                                 Change Log
                             </MenuItem>
                             <MenuItem onClick={handleCloseMenu}>
-                                <InfoOutlinedIcon height="24px" width="24px" sx={{ mr: 1 }} />
+                                <img
+                                    src={about}
+                                    alt="Custom Icon"
+                                    style={{
+                                        width: "24px",
+                                        height: "24px",
+                                        marginRight: 10
+                                    }}
+                                />
                                 About Us
                             </MenuItem>
 
@@ -710,7 +632,15 @@ const Header = () => {
                             />
 
                             <MenuItem onClick={handleCloseMenu} sx={{ color: 'error.main' }}>
-                                <LogoutOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                                <img
+                                    src={logout}
+                                    alt="Custom Icon"
+                                    style={{
+                                        width: "24px",
+                                        height: "24px",
+                                        marginRight: 10
+                                    }}
+                                />
                                 Log Out
                             </MenuItem>
                         </Menu>
@@ -724,3 +654,93 @@ const Header = () => {
 
 export default Header;
 
+
+
+
+
+// <AppBar position="static" color="default" elevation={1}>
+//     <Toolbar>
+//         <Grid container alignItems="center" justifyContent="space-between" wrap="nowrap" spacing={2}>
+//             <Grid item container xs={4} sm={3} alignItems="center" spacing={1}>
+//                 <Grid item>
+//                     <Typography variant="h6" noWrap component="div">
+//                         NEXPOST
+//                     </Typography>
+//                 </Grid>
+//                 <Grid item>
+//                     <Chip
+//                         label="Free"
+//                         variant="outlined"
+//                         sx={{
+//                             height: {
+//                                 xs: '20px',
+//                                 sm: '40px',
+//                                 md: '30px',
+//                             },
+//                             padding: {
+//                                 xs: '1px 2px',
+//                                 sm: '4px 10px',
+//                                 md: '4px 12px',
+//                             },
+//                             fontSize: {
+//                                 xs: '0.7rem',
+//                                 sm: '0.8rem',
+//                                 md: '0.9rem',
+//                                 lg: '1rem',
+//                             },
+//                             borderColor: '#D1D1D1',
+//                         }}
+//                         className="border-gray-300"
+//                     />
+//                 </Grid>
+//                 <Grid item>
+//                     <Chip
+//                         label="Pro"
+//                         variant="outlined"
+//                         sx={{
+//                             bgcolor: '#FFEAD6',
+//                             color: '#FF7C00',
+//                             height: {
+//                                 xs: '20px',
+//                                 sm: '40px',
+//                                 md: '30px',
+//                             },
+//                             padding: {
+//                                 xs: '1px 2px',
+//                                 sm: '4px 10px',
+//                                 md: '4px 12px',
+//                             },
+//                             fontSize: {
+//                                 xs: '0.7rem',
+//                                 sm: '0.8rem',
+//                                 md: '0.9rem',
+//                                 lg: '1rem',
+//                             },
+//                         }}
+//                         className="bg-orange-100 text-orange-600"
+//                         onClick={handleOpen}
+//                     />
+//                 </Grid>
+//             </Grid>
+
+//             <Grid item xs={12} sm={6} container justifyContent="flex-end" style={{ maxWidth: isSearchOpen ? '100%' : 'auto' }}>
+
+//             </Grid>
+
+//             <Grid item container xs={12} sm={3} alignItems="center" justifyContent="flex-end" spacing={1}>
+//                 <Grid item>
+//                     <IconButton>
+//                         <Badge badgeContent={4} color="error">
+//                             <NotificationsIcon />
+//                         </Badge>
+//                     </IconButton>
+//                 </Grid>
+//                 <Grid item>
+//                     <IconButton>
+//                         <Avatar alt="User" />
+//                     </IconButton>
+//                 </Grid>
+//             </Grid>
+//         </Grid>
+//     </Toolbar>
+// </AppBar>
